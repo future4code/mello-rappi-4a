@@ -1,7 +1,6 @@
 import styled from "styled-components"
 
 export const PageContainer = styled.div`
-    width: 360px;
     height: 640px;
     padding: 0 16px 16px;
     box-sizing: border-box;
@@ -20,7 +19,8 @@ export  const Logo = styled.img`
 
 export const MainContent = styled.div`
     position: absolute;
-    padding: 16px;
+    padding: 0 16px;
+    width: 100%;
     bottom: 188px;
 `
 
@@ -49,6 +49,49 @@ export const Link = styled.p`
     text-align: center;
     padding-top: 12px;
     letter-spacing: -0.39px;
+`
 
+export const InputBorder = styled.div`
+  width: 100%;
+  height: 56px;
+  border: 1px solid #b8b8b8;
+  position: relative;
+  border-radius: 2px;
+  margin: 16px 0px;
+  display: inline-block;
 
+  label{
+    letter-spacing: -0.29px;
+    color: #b8b8b8;
+    font-size: 12px;
+    padding-left: 5px;
+    padding-right: 5px;
+    position:relative;
+    top:-28px;
+    left:5px;
+    background-color:white;
+  }
+
+  input{
+      width: 60%;
+      position: relative;
+      right: 45px;
+      text-align: start;
+      height: 18px;
+      margin: 19px 0 19px 16px;
+      border: none;
+      outline: none;
+      &:selected{
+          background-color: white;
+      }   
+  }
+`
+
+export const ShowPasswordIcon = styled.img`
+  padding-right: 16px;  
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  transform: translateY(-50%)
 `
