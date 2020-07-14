@@ -3,16 +3,23 @@ import { useHistory } from "react-router-dom";
 
 import useForm from "../../hooks/useForm"
 import { login } from "../../functions/axios";
-import { LoginContainer, Tittle, Button } from "./styles"
+import { PageContainer, Logo, MainContent, Tittle, Button, Link } from "./styles"
 import logo from "../../assets/logo_colored.svg"
-
-//componentes material-ui
+//material-ui
+import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField"
 
-
+//estilo para componentes do material
+const useStyles = makeStyles((theme) => ({
+    input: {
+      margin: theme.spacing(1, 0),
+    },
+}));
 
 function LoginPage() {
   let history = useHistory();
+  const classes = useStyles()   
+  
   const [form, handleFormChange] = useForm({email: "", password: ""})
 
   const handleFormSubmit = async (event) => {
@@ -26,44 +33,45 @@ function LoginPage() {
       }
   }
 
-
-  const goToSignUpPage = () => {
-    history.push("/signup");
-  }
-
-
   return (
-    <LoginContainer>
-      <img src={logo} alt="rappi4 logo"/>
-      <Tittle>Entrar</Tittle>  
-      <form onSubmit={handleFormSubmit}>
-          <TextField 
-            onChange={handleFormChange}
-            variant="outlined"
-            placeholder="email@email.com"
-            label="E-mail"
-            fullWidth
-            name="email"
-            value={form.email}
-            type="email"
-            required 
-          />
-          <TextField
-            onChange={handleFormChange}
-            variant="outlined"
-            placeholder="Mínimo 6 caracteres" 
-            label="Senha"
-            fullWidth
-            name="password"
-            value={form.password}
-            type="password"
-            required
-             
-          />
-          <Button type="submit">Entrar</Button>
-          <button onClick={goToSignUpPage}>Fazer cadastro</button>
-      </form>
-    </LoginContainer>
+    <PageContainer>
+      <Logo src={logo} alt="rappi4 logo"/>
+      <MainContent>
+          <Tittle>Entrar</Tittle>  
+          <form onSubmit={handleFormSubmit}>
+              <TextField 
+                className={classes.input}
+                onChange={handleFormChange}
+                variant="outlined"
+                placeholder="email@email.com"
+                label="E-mail"
+                fullWidth
+                name="email"
+                value={form.email}
+                type="email"
+                required 
+              />
+              <TextField
+                className={classes.input}
+                onChange={handleFormChange}
+                variant="outlined"
+                placeholder="Mínimo 6 caracteres" 
+                label="Senha"
+                fullWidth
+                name="password"
+                value={form.password}
+                type="password"
+                required 
+              />
+              <Button type="submit">Entrar</Button>
+          </form>
+          <Link
+                onClick={() => history.push("/signup")}
+              >
+                  Não possui cadastro? Clique aqui.
+          </Link>
+      </MainContent>
+    </PageContainer>
   );
 }
 
