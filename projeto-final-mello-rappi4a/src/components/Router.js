@@ -2,8 +2,7 @@ import React from "react";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import DocumentTitle from "react-document-title";
 
-import ProtectedRoute from "./ProtectedRoute"
-import CartPage from "./CartPage";
+import CartPage from "./CartPage/index";
 import EditAddressPage from "./EditAddressPage/index";
 import EditProfilePage from "./EditProfilePage/index";
 import FeedPage from "./FeedPage/index";
@@ -18,14 +17,18 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <DocumentTitle title="Carrinho">
-            <ProtectedRoute exact path="/cart" component={CartPage} />
-        </DocumentTitle>
+        <Route exact path="/cart" >
+          <DocumentTitle title="Carrinho">
+            <CartPage />
+          </DocumentTitle>
+        </Route>
 
-        <DocumentTitle>
-            <Route exact path="/edit-address" component={EditAddressPage} />
-        </DocumentTitle>
-        
+        <Route exact path="/edit-address">
+          <DocumentTitle title="Editar endereço">
+            <EditAddressPage />
+          </DocumentTitle>
+        </Route>
+
         <Route exact path="/edit-profile">
           <DocumentTitle title="Editar perfil">
             <EditProfilePage />
