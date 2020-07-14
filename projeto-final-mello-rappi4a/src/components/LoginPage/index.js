@@ -5,11 +5,10 @@ import useForm from "../../hooks/useForm"
 import { login } from "../../functions/axios";
 import { PageContainer, Logo, MainContent, Tittle, Button, Link } from "./styles"
 import logo from "../../assets/logo_colored.svg"
-//material-ui
+
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField"
 
-//estilo para componentes do material
 const useStyles = makeStyles((theme) => ({
     input: {
       margin: theme.spacing(1, 0),
