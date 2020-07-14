@@ -9,7 +9,7 @@ const token =
 const baseUrl = "https://us-central1-missao-newton.cloudfunctions.net/rappi4A";
 
 function EditAddressPage() {
-  const { form, onChange } = useForm({
+  const [form, handleFormChange] = useForm({
     street: "",
     number: "",
     neighbourhood: "",
@@ -37,12 +37,6 @@ function EditAddressPage() {
     }
   };
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-
-    onChange(name, value);
-  };
-
   return (
     <div>
       Editar
@@ -52,7 +46,7 @@ function EditAddressPage() {
           required
           name="street"
           value={form.street}
-          onChange={handleInputChange}
+          onChange={handleFormChange}
           id="street"
           type="text"
           placeholder="Rua"
@@ -63,7 +57,7 @@ function EditAddressPage() {
           required
           name="number"
           value={form.number}
-          onChange={handleInputChange}
+          onChange={handleFormChange}
           id="number"
           type="number"
           placeholder="Número"
@@ -74,7 +68,7 @@ function EditAddressPage() {
           required
           name="neighbourhood"
           value={form.neighbourhood}
-          onChange={handleInputChange}
+          onChange={handleFormChange}
           id="neighbourhood"
           type="text"
           placeholder="Bairro"
@@ -85,7 +79,7 @@ function EditAddressPage() {
           required
           name="city"
           value={form.city}
-          onChange={handleInputChange}
+          onChange={handleFormChange}
           id="city"
           type="text"
           placeholder="Cidade"
@@ -96,7 +90,7 @@ function EditAddressPage() {
           required
           name="state"
           value={form.state}
-          onChange={handleInputChange}
+          onChange={handleFormChange}
           id="state"
           type="text"
           placeholder="Estado"
@@ -107,7 +101,7 @@ function EditAddressPage() {
           required
           name="complement"
           value={form.complement}
-          onChange={handleInputChange}
+          onChange={handleFormChange}
           id="complement"
           type="text"
           placeholder="Complemento"

@@ -9,7 +9,7 @@ const token =
 const baseUrl = "https://us-central1-missao-newton.cloudfunctions.net/rappi4A";
 
 function EditProfilePage() {
-  const { form, onChange } = useForm({ name: "", email: "", cpf: "" });
+  const [form, handleFormChange] = useForm({ name: "", email: "", cpf: "" });
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -30,12 +30,6 @@ function EditProfilePage() {
     }
   };
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-
-    onChange(name, value);
-  };
-
   return (
     <div>
       Editar
@@ -45,7 +39,7 @@ function EditProfilePage() {
           required
           name="name"
           value={form.name}
-          onChange={handleInputChange}
+          onChange={handleFormChange}
           id="name"
           type="text"
           placeholder="Nome"
@@ -56,7 +50,7 @@ function EditProfilePage() {
           required
           name="email"
           value={form.email}
-          onChange={handleInputChange}
+          onChange={handleFormChange}
           id="email"
           type="email"
           placeholder="E-mail"
@@ -67,7 +61,7 @@ function EditProfilePage() {
           required
           name="cpf"
           value={form.cpf}
-          onChange={handleInputChange}
+          onChange={handleFormChange}
           id="cpf"
           type="number"
           placeholder="CPF"
