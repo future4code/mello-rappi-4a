@@ -1,6 +1,12 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
+import HomePage from "./../../assets/homepage.svg";
+import Avatar from "./../../assets/avatar.svg";
+import Cart from "./../../assets/shopping_cart.svg";
+
+import { HeaderBox, HeaderIcons } from "./styles";
+
 function Header() {
   let history = useHistory();
 
@@ -17,13 +23,13 @@ function Header() {
   };
 
   return (
-    <div>
-      <hr />
-      <p>Header</p>
-      <button onClick={goToFeedPage}>Home</button>
-      <button onClick={goToCartPage}>Carrinho</button>
-      <button onClick={goToProfilePage}>Perfil</button>
-    </div>
+    <HeaderBox>
+      <HeaderIcons>
+        <img src={HomePage} alt={"Home"} onClick={goToFeedPage} />
+        <img src={Cart} alt={"Carrinho"} onClick={goToCartPage} />
+        <img src={Avatar} alt={"Perfil"} onClick={goToProfilePage} />
+      </HeaderIcons>
+    </HeaderBox>
   );
 }
 

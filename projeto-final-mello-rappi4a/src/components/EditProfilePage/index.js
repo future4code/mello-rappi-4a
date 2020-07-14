@@ -3,6 +3,8 @@ import axios from "axios";
 
 import useForm from "../../hooks/useForm";
 
+import { EditProfileTitle, EditProfileForm } from "./styles";
+
 const token =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlM3Zjg0RUY4dU11Z29oZ0JVa3gyIiwibmFtZSI6IkNhbWlsYSIsImVtYWlsIjoiY2FtaWxhLm1pcmFuZGEubW91cmFAZ21haWwuY29tIiwiY3BmIjoiNDYzLjIzOS4zMDgtODkiLCJoYXNBZGRyZXNzIjp0cnVlLCJhZGRyZXNzIjoiUi4gUGVpeG90byBHb21pZGUsIDI4MSwgNzcgLSBKZC4gUGF1bGlzdGEiLCJpYXQiOjE1OTQ2Njk3NjJ9.6FxaW6pRsbM1fR04PllzKZXFPJT3HvRfg_7gjYV4msg";
 
@@ -32,8 +34,12 @@ function EditProfilePage() {
 
   return (
     <div>
-      Editar
-      <form onSubmit={handleSubmit}>
+      <EditProfileTitle>
+        <p>Editar</p>
+      </EditProfileTitle>
+      <hr />
+
+      <EditProfileForm onSubmit={handleSubmit}>
         <label htmlFor="name">Nome</label>
         <input
           required
@@ -68,7 +74,7 @@ function EditProfilePage() {
         />
 
         <button>Salvar</button>
-      </form>
+      </EditProfileForm>
     </div>
   );
 }

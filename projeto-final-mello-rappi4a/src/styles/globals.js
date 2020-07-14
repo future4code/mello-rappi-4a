@@ -2,6 +2,7 @@ import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
     * {
+    font-family: Roboto-Regular, sans-serif;
     max-width: 420px;
     min-width: 320px;
     margin: 0;
@@ -9,5 +10,4 @@ export default createGlobalStyle`
     outline: 0;
     box-sizing: border-box;
   }
-
 `;
