@@ -1,7 +1,10 @@
 import React from "react";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 import useForm from "../../hooks/useForm";
+
+import { Title, Form } from "./styles";
 
 const token =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlM3Zjg0RUY4dU11Z29oZ0JVa3gyIiwibmFtZSI6IkNhbWlsYSIsImVtYWlsIjoiY2FtaWxhLm1pcmFuZGEubW91cmFAZ21haWwuY29tIiwiY3BmIjoiNDYzLjIzOS4zMDgtODkiLCJoYXNBZGRyZXNzIjp0cnVlLCJhZGRyZXNzIjoiUi4gUGVpeG90byBHb21pZGUsIDI4MSwgNzcgLSBKZC4gUGF1bGlzdGEiLCJpYXQiOjE1OTQ2Njk3NjJ9.6FxaW6pRsbM1fR04PllzKZXFPJT3HvRfg_7gjYV4msg";
@@ -9,6 +12,12 @@ const token =
 const baseUrl = "https://us-central1-missao-newton.cloudfunctions.net/rappi4A";
 
 function EditAddressPage() {
+  let history = useHistory();
+
+  const goToProfilePage = () => {
+    history.push("/profile");
+  };
+
   const [form, handleFormChange] = useForm({
     street: "",
     number: "",
@@ -35,13 +44,19 @@ function EditAddressPage() {
       console.log(error);
       alert("Não foi possível alterar");
     }
+
+    goToProfilePage();
   };
 
   return (
     <div>
-      Editar
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="street">Rua</label>
+      <Title>
+        <p>Endereço</p>
+      </Title>
+      <hr />
+
+      <Form onSubmit={handleSubmit}>
+        <label htmlFor="street">Logradouro*</label>
         <input
           required
           name="street"
@@ -52,7 +67,7 @@ function EditAddressPage() {
           placeholder="Rua"
         />
 
-        <label htmlFor="number">Número</label>
+        <label htmlFor="number">Número*</label>
         <input
           required
           name="number"
@@ -63,7 +78,17 @@ function EditAddressPage() {
           placeholder="Número"
         />
 
-        <label htmlFor="neighbourhood">Bairro</label>
+        <label htmlFor="complement">Complemento</label>
+        <input
+          name="complement"
+          value={form.complement}
+          onChange={handleFormChange}
+          id="complement"
+          type="text"
+          placeholder="Apto./Bloco"
+        />
+
+        <label htmlFor="neighbourhood">Bairro*</label>
         <input
           required
           name="neighbourhood"
@@ -74,7 +99,7 @@ function EditAddressPage() {
           placeholder="Bairro"
         />
 
-        <label htmlFor="city">Cidade</label>
+        <label htmlFor="city">Cidade*</label>
         <input
           required
           name="city"
@@ -85,7 +110,7 @@ function EditAddressPage() {
           placeholder="Cidade"
         />
 
-        <label htmlFor="state">Estado</label>
+        <label htmlFor="state">Estado*</label>
         <input
           required
           name="state"
@@ -96,19 +121,8 @@ function EditAddressPage() {
           placeholder="Estado"
         />
 
-        <label htmlFor="complement">Complemento</label>
-        <input
-          required
-          name="complement"
-          value={form.complement}
-          onChange={handleFormChange}
-          id="complement"
-          type="text"
-          placeholder="Complemento"
-        />
-
         <button>Salvar</button>
-      </form>
+      </Form>
     </div>
   );
 }
