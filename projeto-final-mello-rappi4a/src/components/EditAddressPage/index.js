@@ -31,23 +31,23 @@ function EditAddressPage() {
     complement: "",
   });
 
-  const token = localStorage.getItem("token");
+  const token = JSON.parse(localStorage.getItem("rappi4")).token
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const axiosConfig = {
       headers: {
-        Authorization: token,
+        auth: token,
       },
     };
 
     try {
-      const response = await axios.put(`${baseUrl}/profile`, form, axiosConfig);
+      const response = await axios.put(`${baseUrl}/address`, form, axiosConfig);
       console.log(response);
       alert("Dados alterados com sucesso");
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
       alert("Não foi possível alterar");
     }
 

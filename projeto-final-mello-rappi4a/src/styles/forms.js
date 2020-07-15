@@ -19,34 +19,32 @@ export const InputBorder = styled.div`
   height: 56px;
   border: 1px solid #b8b8b8;
   position: relative;
-  border-radius: 4px;
-  margin: 16px 0px;
-  display: inline-block;
-
-  label {
+  border-radius: 2px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  
+  label{
+    width: 60px;  
     letter-spacing: -0.29px;
     color: #b8b8b8;
     font-size: 12px;
     padding-left: 5px;
     padding-right: 5px;
-    position: relative;
-    top: -28px;
-    left: 5px;
-    background-color: white;
+    position:relative;
+    top:-8px;
+    left:5px;
+    background-color:white;
   }
 
-  input {
-    width: 60%;
-    position: relative;
-    right: 45px;
+  input{
+    width: 70%;
+    border: none; 
+    left: 0px;
+    margin-top: 4px;
     text-align: start;
     height: 18px;
-    margin: 19px 0 19px 16px;
-    border: none;
-    outline: none;
-    &:selected {
-      background-color: white;
-    }
+    padding-left: 16px;
   }
 `;
 

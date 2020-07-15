@@ -26,11 +26,11 @@ function EditProfilePage() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const token = localStorage.getItem("token");
+    const token = JSON.parse(localStorage.getItem("rappi4")).token;
 
     const axiosConfig = {
       headers: {
-        Authorization: token,
+        auth: token,
       },
     };
 
@@ -39,7 +39,7 @@ function EditProfilePage() {
       console.log(response);
       alert("Dados alterados com sucesso");
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
       alert("Não foi possível alterar");
     }
   };
