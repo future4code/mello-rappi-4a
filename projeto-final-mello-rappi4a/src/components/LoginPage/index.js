@@ -23,13 +23,14 @@ function LoginPage() {
           history.push("/feed")
       } else {
           window.alert(response.message)
+          history.push("/signup")
       }
   }
 
   const handleClickShowPassword = () => {
       setVisiblePassword(!visiblePassword)
   }
-
+ 
   return (
     <PageContainer>
       <Logo src={logo} alt="rappi4 logo"/>
