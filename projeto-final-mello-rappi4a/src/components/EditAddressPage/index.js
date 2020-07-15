@@ -4,7 +4,14 @@ import { useHistory } from "react-router-dom";
 
 import useForm from "../../hooks/useForm";
 
-import { Title, Form } from "./styles";
+import ArrowBack from "./../../assets/arrow_back.svg";
+
+import {
+  Button,
+  InputBorder,
+  EditPagesForm,
+  GoBack,
+} from "./../../styles/forms";
 
 const baseUrl = "https://us-central1-missao-newton.cloudfunctions.net/rappi4A";
 
@@ -49,79 +56,91 @@ function EditAddressPage() {
 
   return (
     <div>
-      <Title>
-        <p>Endereço</p>
-      </Title>
-      <hr />
+      <GoBack>
+        <img src={ArrowBack} alt={"Voltar"} onClick={goToProfilePage} />
+        <span>Endereço</span>
+      </GoBack>
 
-      <Form onSubmit={handleSubmit}>
-        <label htmlFor="street">Logradouro*</label>
-        <input
-          required
-          name="street"
-          value={form.street}
-          onChange={handleFormChange}
-          id="street"
-          type="text"
-          placeholder="Rua"
-        />
+      <EditPagesForm onSubmit={handleSubmit}>
+        <InputBorder>
+          <label htmlFor="street">Logradouro*</label>
+          <input
+            required
+            name="street"
+            value={form.street}
+            onChange={handleFormChange}
+            id="street"
+            type="text"
+            placeholder="Rua"
+          />
+        </InputBorder>
 
-        <label htmlFor="number">Número*</label>
-        <input
-          required
-          name="number"
-          value={form.number}
-          onChange={handleFormChange}
-          id="number"
-          type="number"
-          placeholder="Número"
-        />
+        <InputBorder>
+          <label htmlFor="number">Número*</label>
+          <input
+            required
+            name="number"
+            value={form.number}
+            onChange={handleFormChange}
+            id="number"
+            type="number"
+            placeholder="Número"
+          />
+        </InputBorder>
 
-        <label htmlFor="complement">Complemento</label>
-        <input
-          name="complement"
-          value={form.complement}
-          onChange={handleFormChange}
-          id="complement"
-          type="text"
-          placeholder="Apto./Bloco"
-        />
+        <InputBorder>
+          <label htmlFor="complement">Complemento</label>
+          <input
+            name="complement"
+            value={form.complement}
+            onChange={handleFormChange}
+            id="complement"
+            type="text"
+            placeholder="Apto./Bloco"
+          />
+        </InputBorder>
 
-        <label htmlFor="neighbourhood">Bairro*</label>
-        <input
-          required
-          name="neighbourhood"
-          value={form.neighbourhood}
-          onChange={handleFormChange}
-          id="neighbourhood"
-          type="text"
-          placeholder="Bairro"
-        />
+        <InputBorder>
+          <label htmlFor="neighbourhood">Bairro*</label>
+          <input
+            required
+            name="neighbourhood"
+            value={form.neighbourhood}
+            onChange={handleFormChange}
+            id="neighbourhood"
+            type="text"
+            placeholder="Bairro"
+          />
+        </InputBorder>
 
-        <label htmlFor="city">Cidade*</label>
-        <input
-          required
-          name="city"
-          value={form.city}
-          onChange={handleFormChange}
-          id="city"
-          type="text"
-          placeholder="Cidade"
-        />
+        <InputBorder>
+          <label htmlFor="city">Cidade*</label>
+          <input
+            required
+            name="city"
+            value={form.city}
+            onChange={handleFormChange}
+            id="city"
+            type="text"
+            placeholder="Cidade"
+          />
+        </InputBorder>
 
-        <label htmlFor="state">Estado*</label>
-        <input
-          required
-          name="state"
-          value={form.state}
-          onChange={handleFormChange}
-          id="state"
-          type="text"
-          placeholder="Estado"
-        />
+        <InputBorder>
+          <label htmlFor="state">Estado*</label>
+          <input
+            required
+            name="state"
+            value={form.state}
+            onChange={handleFormChange}
+            id="state"
+            type="text"
+            placeholder="Estado"
+          />
+        </InputBorder>
 
-        <button>Salvar</button>
-      </Form>
+        <Button>Salvar</Button>
+      </EditPagesForm>
     </div>
   );
 }

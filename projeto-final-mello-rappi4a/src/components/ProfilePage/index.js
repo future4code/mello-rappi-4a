@@ -20,7 +20,7 @@ function ProfilePage() {
     getOrderHistory();
   }, []);
 
-  const token = localStorage.getItem("token");
+  const token = JSON.parse(localStorage.getItem("rappi4")).token;
 
   const axiosConfig = {
     headers: {

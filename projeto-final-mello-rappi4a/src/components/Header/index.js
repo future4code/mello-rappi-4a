@@ -5,7 +5,7 @@ import HomePage from "./../../assets/homepage.svg";
 import Avatar from "./../../assets/avatar.svg";
 import Cart from "./../../assets/shopping_cart.svg";
 
-import { HeaderBox, HeaderIcons } from "./styles";
+import { HeaderBox } from "./styles";
 
 function Header() {
   let history = useHistory();
@@ -24,11 +24,9 @@ function Header() {
 
   return (
     <HeaderBox>
-      <HeaderIcons>
-        <img src={HomePage} alt={"Home"} onClick={goToFeedPage} />
-        <img src={Cart} alt={"Carrinho"} onClick={goToCartPage} />
-        <img src={Avatar} alt={"Perfil"} onClick={goToProfilePage} />
-      </HeaderIcons>
+      <img src={HomePage} alt={"Home"} onClick={goToFeedPage} />
+      <img src={Cart} alt={"Carrinho"} onClick={goToCartPage} />
+      <img src={Avatar} alt={"Perfil"} onClick={goToProfilePage} />
     </HeaderBox>
   );
 }
