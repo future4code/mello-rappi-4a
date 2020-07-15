@@ -2,6 +2,7 @@ import React from "react";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import DocumentTitle from "react-document-title";
 
+import SplashScreen from "./SplashScreen"
 import CartPage from "./CartPage/index";
 import EditAddressPage from "./EditAddressPage/index";
 import EditProfilePage from "./EditProfilePage/index";
@@ -19,7 +20,8 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" component={LoginPage} />
+        <Route exact path="/" component={SplashScreen} />
+        <Route exact path="/login" component={LoginPage} />
         <Route exact path="/signup" component={SignUpPage} />
           {/* <DocumentTitle title="Cadastro"> */}
         <ProtectedRoute exact path="/cart" component={CartPage} />
