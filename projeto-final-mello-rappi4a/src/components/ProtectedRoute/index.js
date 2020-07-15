@@ -7,7 +7,7 @@ const ProtectedRoute = (props) => {
   const history = useHistory();
   const isLoggedIn = Boolean(localStorage.getItem("rappi4"));
 
-  !isLoggedIn && history.push("/login");
+  !isLoggedIn && history.push("/");
   return isLoggedIn ? <Route exact path={path} component={component} /> : null;
 };
 

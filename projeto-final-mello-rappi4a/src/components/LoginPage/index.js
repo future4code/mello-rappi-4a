@@ -23,6 +23,7 @@ function LoginPage() {
           history.push("/feed")
       } else {
           window.alert(response.message)
+          history.push("/signup")
       }
   }
 
@@ -30,7 +31,7 @@ function LoginPage() {
   const goToSignUpPage = () => {
     history.push("/signup");
   }
-
+  
 
   return (
     <LoginContainer>

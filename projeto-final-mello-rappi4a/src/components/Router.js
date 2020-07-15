@@ -12,70 +12,32 @@ import RestaurantPage from "./RestaurantPage/index";
 import SearchPage from "./SearchPage/index";
 import SignUpAddressPage from "./SignUpAddressPage/index";
 import SignUpPage from "./SignUpPage/index";
+import ProtectedRoute from "./ProtectedRoute"
+
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/cart" >
-          <DocumentTitle title="Carrinho">
-            <CartPage />
-          </DocumentTitle>
-        </Route>
-
-        <Route exact path="/edit-address">
-          <DocumentTitle title="Editar endereço">
-            <EditAddressPage />
-          </DocumentTitle>
-        </Route>
-
-        <Route exact path="/edit-profile">
-          <DocumentTitle title="Editar perfil">
-            <EditProfilePage />
-          </DocumentTitle>
-        </Route>
-
-        <Route exact path="/feed">
-          <DocumentTitle title="Home">
-            <FeedPage />
-          </DocumentTitle>
-        </Route>
-
-        <Route exact path="/">
-          <DocumentTitle title="Login">
-            <LoginPage />
-          </DocumentTitle>
-        </Route>
-
-        <Route exact path="/profile">
-          <DocumentTitle title="Seu perfil">
-            <ProfilePage />
-          </DocumentTitle>
-        </Route>
-
-        <Route exact path="/restaurant">
-          <DocumentTitle title="Restaurante">
-            <RestaurantPage />
-          </DocumentTitle>
-        </Route>
-
-        <Route exact path="/search">
-          <DocumentTitle title="Buscar">
-            <SearchPage />
-          </DocumentTitle>
-        </Route>
-
-        <Route exact path="/signup-address">
-          <DocumentTitle title="Cadastrar endereço">
-            <SignUpAddressPage />
-          </DocumentTitle>
-        </Route>
-
-        <Route exact path="/signup">
-          <DocumentTitle title="Cadastro">
-            <SignUpPage />
-          </DocumentTitle>
-        </Route>
+        <Route exact path="/" component={LoginPage} />
+        <Route exact path="/signup" component={SignUpPage} />
+          {/* <DocumentTitle title="Cadastro"> */}
+        <ProtectedRoute exact path="/cart" component={CartPage} />
+          {/* <DocumentTitle title="Carrinho"> */}
+        <ProtectedRoute exact path="/edit-address" component={EditAddressPage} />
+          {/* <DocumentTitle title="Editar endereço"> */}      
+        <ProtectedRoute exact path="/edit-profile" component={EditProfilePage} />
+          {/* <DocumentTitle title="Editar perfil"> */}        
+        <ProtectedRoute exact path="/feed" component={FeedPage} />
+          {/* <DocumentTitle title="Home"> */}       
+        <ProtectedRoute exact path="/profile" component={ProfilePage} />
+          {/* <DocumentTitle title="Seu perfil"> */}      
+        <ProtectedRoute exact path="/restaurant" component={RestaurantPage} />
+          {/* <DocumentTitle title="Restaurante"> */}
+        <ProtectedRoute exact path="/search" component={SearchPage} />
+          {/* <DocumentTitle title="Buscar"> */}   
+        <ProtectedRoute exact path="/signup-address" component={SignUpAddressPage} />
+          {/* <DocumentTitle title="Cadastrar endereço"> */}
       </Switch>
     </BrowserRouter>
   );
