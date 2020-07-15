@@ -5,6 +5,8 @@ import Header from "../Header/index";
 function FeedPage() {
   let history = useHistory();
 
+  console.log(JSON.parse(localStorage.getItem("rappi4")).token)
+
   const goToSearchPage = () => {
     history.push("/search");
   };
