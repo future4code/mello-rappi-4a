@@ -21,8 +21,9 @@ export const Title = styled.div`
 
 export const ProfileInfo = styled.div`
   display: flex;
+  justify-content: space-between;
 
-  margin: 16px 0px 0px 16px;
+  margin: 16px 16px 0px 16px;
 
   img {
     width: 24px;

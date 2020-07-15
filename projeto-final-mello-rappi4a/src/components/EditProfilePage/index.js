@@ -1,14 +1,27 @@
 import React from "react";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 import useForm from "../../hooks/useForm";
 
-import { EditProfileTitle, EditProfileForm } from "./styles";
+import ArrowBack from "./../../assets/arrow_back.svg";
+
+import {
+  Button,
+  InputBorder,
+  EditPagesForm,
+  GoBack,
+} from "./../../styles/forms";
 
 const baseUrl = "https://us-central1-missao-newton.cloudfunctions.net/rappi4A";
 
 function EditProfilePage() {
+  let history = useHistory();
   const [form, handleFormChange] = useForm({ name: "", email: "", cpf: "" });
+
+  const goToProfilePage = () => {
+    history.push("/profile");
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -33,47 +46,53 @@ function EditProfilePage() {
 
   return (
     <div>
-      <EditProfileTitle>
-        <p>Editar</p>
-      </EditProfileTitle>
-      <hr />
+      <GoBack>
+        <img src={ArrowBack} alt={"Voltar"} onClick={goToProfilePage} />
+        <span>Editar</span>
+      </GoBack>
 
-      <EditProfileForm onSubmit={handleSubmit}>
-        <label htmlFor="name">Nome</label>
-        <input
-          required
-          name="name"
-          value={form.name}
-          onChange={handleFormChange}
-          id="name"
-          type="text"
-          placeholder="Nome"
-        />
+      <EditPagesForm onSubmit={handleSubmit}>
+        <InputBorder>
+          <label htmlFor="name">Nome</label>
+          <input
+            required
+            name="name"
+            value={form.name}
+            onChange={handleFormChange}
+            id="name"
+            type="text"
+            placeholder="Nome"
+          />
+        </InputBorder>
 
-        <label htmlFor="email">E-mail</label>
-        <input
-          required
-          name="email"
-          value={form.email}
-          onChange={handleFormChange}
-          id="email"
-          type="email"
-          placeholder="E-mail"
-        />
+        <InputBorder>
+          <label htmlFor="email">E-mail</label>
+          <input
+            required
+            name="email"
+            value={form.email}
+            onChange={handleFormChange}
+            id="email"
+            type="email"
+            placeholder="E-mail"
+          />
+        </InputBorder>
 
-        <label htmlFor="cpf">CPF</label>
-        <input
-          required
-          name="cpf"
-          value={form.cpf}
-          onChange={handleFormChange}
-          id="cpf"
-          type="number"
-          placeholder="CPF"
-        />
+        <InputBorder>
+          <label htmlFor="cpf">CPF</label>
+          <input
+            required
+            name="cpf"
+            value={form.cpf}
+            onChange={handleFormChange}
+            id="cpf"
+            type="number"
+            placeholder="CPF"
+          />
+        </InputBorder>
 
-        <button>Salvar</button>
-      </EditProfileForm>
+        <Button>Salvar</Button>
+      </EditPagesForm>
     </div>
   );
 }

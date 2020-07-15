@@ -9,8 +9,8 @@ import {
   AddToCartButton,
   Select,
 } from "./styles";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import Dialog from "@material-ui/core/Dialog";
+//import DialogTitle from "@material-ui/core/DialogTitle";
+//import Dialog from "@material-ui/core/Dialog";
 
 function RestaurantPage() {
   let history = useHistory();
@@ -167,13 +167,13 @@ function RestaurantPage() {
           }
         })}
       </div>
-      <Dialog
+      <div
         open={showModal}
         onClose={handleCloseModal}
         fullWidth={true}
         maxWidth={"sd"}
       >
-        <DialogTitle>
+        <div>
           <p>Adicione uma quantidade</p>
           <Select onChange={handleProductQuantity}>
             <option value="0">0</option>
@@ -183,8 +183,8 @@ function RestaurantPage() {
           <AddToCartButton onClick={handleCloseModal}>
             Adicionar ao carrinho
           </AddToCartButton>
-        </DialogTitle>
-      </Dialog>
+        </div>
+      </div>
     </RestaurantDetailPage>
   );
 }
