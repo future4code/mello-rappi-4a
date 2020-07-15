@@ -5,7 +5,12 @@ import {
   RestaurantDetailPage,
   ProductContainer,
   RestaurantLogo,
+  ProductImage,
+  AddToCartButton,
+  Select,
 } from "./styles";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Dialog from "@material-ui/core/Dialog";
 
 function RestaurantPage() {
   let history = useHistory();
@@ -13,11 +18,20 @@ function RestaurantPage() {
   const goToFeedPage = () => {
     history.push("/feed");
   };
-
-  const handleModal = () => {
-    setShowModal(!showModal);
-  };
   const [showModal, setShowModal] = useState(false);
+  const [quantity, setQuantity] = useState(0);
+
+  const handleShowModal = () => {
+    setShowModal(true);
+  };
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+  const handleProductQuantity = (event) => {
+    setQuantity(event.target.value);
+    console.log(quantity);
+  };
+
   const [restaurantDetail, setRestaurantDetail] = useState({
     restaurant: {
       products: [
@@ -144,14 +158,33 @@ function RestaurantPage() {
           if (product.category === "Salgado") {
             return (
               <ProductContainer>
+                <ProductImage src={product.photoUrl} />
                 <p>{product.name}</p>
                 <p>{product.description}</p>
-                <button onClick={handleModal}>Adicionar</button>
+                <button onClick={handleShowModal}>Adicionar</button>
               </ProductContainer>
             );
           }
         })}
       </div>
+      <Dialog
+        open={showModal}
+        onClose={handleCloseModal}
+        fullWidth={true}
+        maxWidth={"sd"}
+      >
+        <DialogTitle>
+          <p>Adicione uma quantidade</p>
+          <Select onChange={handleProductQuantity}>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+          </Select>
+          <AddToCartButton onClick={handleCloseModal}>
+            Adicionar ao carrinho
+          </AddToCartButton>
+        </DialogTitle>
+      </Dialog>
     </RestaurantDetailPage>
   );
 }

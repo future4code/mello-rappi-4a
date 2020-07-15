@@ -9,7 +9,6 @@ export const RestaurantContainer = styled.div`
 `;
 
 export const RestaurantDetailPage = styled.div`
-  width: 100vw;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,4 +26,16 @@ export const RestaurantLogo = styled.img`
   width: 100%;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
+`;
+
+export const ProductImage = styled.img`
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+`;
+
+export const AddToCartButton = styled.button`
+  min-width: 20%;
+`;
+export const Select = styled.select`
+  min-width: 20%;
 `;
