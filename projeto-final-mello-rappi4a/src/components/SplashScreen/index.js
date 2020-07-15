@@ -1,13 +1,10 @@
-import React from "react";
-import { useHistory } from "react-router-dom"
-import { Background, Logo } from "./styles"
-import logo from "../../assets/logo_white.svg"
-
-
-
+import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { Background, Logo } from "./styles";
+import logo from "../../assets/logo_white.svg";
 
 function SplashScreen() {
-  const history = useHistory()  
+  const history = useHistory();
 
   useEffect(() => {
     setTimeout(() => renderApp(), 2000);
@@ -15,19 +12,17 @@ function SplashScreen() {
 
   const renderApp = () => {
     if (localStorage.getItem("rappi4")) {
-        history.replace("/feed")
+      history.replace("/feed");
     } else {
-        history.replace("/login")
+      history.replace("/login");
     }
-  }   
-
-    
+  };
 
   return (
     <Background>
-        <Logo src={logo} alt="rappi4 logo" />
+      <Logo src={logo} alt="rappi4 logo" />
     </Background>
-  )
+  );
 }
 
 export default SplashScreen;

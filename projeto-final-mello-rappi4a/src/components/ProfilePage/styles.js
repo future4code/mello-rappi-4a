@@ -84,3 +84,10 @@ export const OrderHistory = styled.div`
     margin-top: 7px;
   }
 `;
+
+export const EmptyHistory = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 28px;
+`;
