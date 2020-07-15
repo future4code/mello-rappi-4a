@@ -1,19 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import useForm from "../../hooks/useForm"
 import { login } from "../../functions/axios";
-import { LoginContainer, Tittle, Button } from "./styles"
+import { PageContainer, Logo, MainContent, Tittle, Button, Link, InputBorder, ShowPasswordIcon} from "./styles"
 import logo from "../../assets/logo_colored.svg"
-
-//componentes material-ui
-import TextField from "@material-ui/core/TextField"
-
+import visible from "../../assets/password_open.svg"
+import noVisible from "../../assets/password.svg" 
 
 
 function LoginPage() {
   let history = useHistory();
+  
   const [form, handleFormChange] = useForm({email: "", password: ""})
+  const [visiblePassword, setVisiblePassword] = useState(false)
 
   const handleFormSubmit = async (event) => {
       event.preventDefault()
@@ -26,44 +26,49 @@ function LoginPage() {
       }
   }
 
-
-  const goToSignUpPage = () => {
-    history.push("/signup");
+  const handleClickShowPassword = () => {
+      setVisiblePassword(!visiblePassword)
   }
 
-
   return (
-    <LoginContainer>
-      <img src={logo} alt="rappi4 logo"/>
-      <Tittle>Entrar</Tittle>  
-      <form onSubmit={handleFormSubmit}>
-          <TextField 
-            onChange={handleFormChange}
-            variant="outlined"
-            placeholder="email@email.com"
-            label="E-mail"
-            fullWidth
-            name="email"
-            value={form.email}
-            type="email"
-            required 
-          />
-          <TextField
-            onChange={handleFormChange}
-            variant="outlined"
-            placeholder="Mínimo 6 caracteres" 
-            label="Senha"
-            fullWidth
-            name="password"
-            value={form.password}
-            type="password"
-            required
-             
-          />
-          <Button type="submit">Entrar</Button>
-          <button onClick={goToSignUpPage}>Fazer cadastro</button>
-      </form>
-    </LoginContainer>
+    <PageContainer>
+      <Logo src={logo} alt="rappi4 logo"/>
+      <MainContent>
+          <Tittle>Entrar</Tittle>  
+          <form onSubmit={handleFormSubmit}>
+              <InputBorder>
+                  <label>E-mail*</label>
+                  <input
+                    type="email"
+                    onChange={handleFormChange}
+                    placeholder="email@email.com"
+                    name="email"
+                    value={form.email}
+                    required
+                  />
+              </InputBorder>
+              <InputBorder>
+                  <label>Senha*</label>
+                  <input 
+                    type="password"
+                    onChange={handleFormChange}
+                    placeholder="Mínimo 6 caracteres" 
+                    name="password"
+                    value={form.password}
+                    type={visiblePassword ? "text" : "password"}
+                    required
+                  />
+                  <ShowPasswordIcon onClick={handleClickShowPassword} src={visiblePassword ? noVisible : visible}  />
+              </InputBorder>
+              <Button type="submit">Entrar</Button>
+          </form>
+          <Link
+                onClick={() => history.push("/signup")}
+              >
+                  Não possui cadastro? Clique aqui.
+          </Link>
+      </MainContent>
+    </PageContainer>
   );
 }
 
