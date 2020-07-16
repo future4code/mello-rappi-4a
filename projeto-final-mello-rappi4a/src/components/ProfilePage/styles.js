@@ -21,8 +21,9 @@ export const Title = styled.div`
 
 export const ProfileInfo = styled.div`
   display: flex;
+  justify-content: space-between;
 
-  margin: 16px 0px 0px 16px;
+  margin: 16px 16px 0px 16px;
 
   img {
     width: 24px;
@@ -82,4 +83,11 @@ export const OrderHistory = styled.div`
     font-weight: bold;
     margin-top: 7px;
   }
+`;
+
+export const EmptyHistory = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 28px;
 `;

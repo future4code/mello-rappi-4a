@@ -2,14 +2,17 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
-import Header from "../Header";
+import Footer from "../Footer";
 
 import Edit from "./../../assets/edit.svg";
 
-import { Title, ProfileInfo, AddressInfo, OrderHistory } from "./styles";
-
-const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlM3Zjg0RUY4dU11Z29oZ0JVa3gyIiwibmFtZSI6IkNhbWlsYSIsImVtYWlsIjoiY2FtaWxhLm1pcmFuZGEubW91cmFAZ21haWwuY29tIiwiY3BmIjoiNDYzLjIzOS4zMDgtODkiLCJoYXNBZGRyZXNzIjp0cnVlLCJhZGRyZXNzIjoiUi4gUGVpeG90byBHb21pZGUsIDI4MSwgNzcgLSBKZC4gUGF1bGlzdGEiLCJpYXQiOjE1OTQ2Njk3NjJ9.6FxaW6pRsbM1fR04PllzKZXFPJT3HvRfg_7gjYV4msg";
+import {
+  Title,
+  ProfileInfo,
+  AddressInfo,
+  OrderHistory,
+  EmptyHistory,
+} from "./styles";
 
 const baseUrl = "https://us-central1-missao-newton.cloudfunctions.net/rappi4A";
 
@@ -22,6 +25,8 @@ function ProfilePage() {
     getProfile();
     getOrderHistory();
   }, []);
+
+  const token = JSON.parse(localStorage.getItem("rappi4")).token;
 
   const axiosConfig = {
     headers: {
@@ -59,6 +64,55 @@ function ProfilePage() {
     history.push("/edit-address");
   };
 
+  const formattedDateOrder = (created) => {
+    let date = new Date(created);
+    let day = date.getDate();
+    let month = date.getMonth();
+    let year = date.getFullYear();
+
+    switch (month) {
+      case 0:
+        month = "janeiro";
+        return `${day} de ${month} de ${year}`;
+      case 1:
+        month = "fevereiro";
+        return `${day} de ${month} de ${year}`;
+      case 2:
+        month = "março";
+        return `${day} de ${month} de ${year}`;
+      case 3:
+        month = "abril";
+        return `${day} de ${month} de ${year}`;
+      case 4:
+        month = "maio";
+        return `${day} de ${month} de ${year}`;
+      case 5:
+        month = "junho";
+        return `${day} de ${month} de ${year}`;
+      case 6:
+        month = "julho";
+        return `${day} de ${month} de ${year}`;
+      case 7:
+        month = "agosto";
+        return `${day} de ${month} de ${year}`;
+      case 8:
+        month = "setembro";
+        return `${day} de ${month} de ${year}`;
+      case 9:
+        month = "outubro";
+        return `${day} de ${month} de ${year}`;
+      case 10:
+        month = "novembro";
+        return `${day} de ${month} de ${year}`;
+      case 11:
+        month = "dezembro";
+        return `${day} de ${month} de ${year}`;
+      default:
+        month = "";
+        return `Data indisponível`;
+    }
+  };
+
   return (
     <div>
       <Title>
@@ -88,17 +142,19 @@ function ProfilePage() {
       </AddressInfo>
 
       <OrderHistory>
+        <p>Histórico de pedidos</p> <hr />
         {orderHistory.length === 0 ? (
-          <div>Você não realizou nenhum pedido</div>
+          <EmptyHistory>
+            <p>Você não realizou nenhum pedido</p>
+          </EmptyHistory>
         ) : (
           <div>
-            <p>Histórico de pedidos</p> <hr />
             {orderHistory.map((order) => {
               return (
                 <div key={order.createdAt} className="orderData">
                   <div>
                     <p id="restaurantName">{order.restaurantName}</p>
-                    <p id="dateInfo">23 de outubro de 2019</p>
+                    <p id="dateInfo">{formattedDateOrder(order.createdAt)}</p>
                     <p id="totalPrice">
                       SUBTOTAL R$ {order.totalPrice.toFixed(2)}
                     </p>
@@ -109,7 +165,7 @@ function ProfilePage() {
           </div>
         )}
       </OrderHistory>
-      <Header />
+      <Footer />
     </div>
   );
 }
