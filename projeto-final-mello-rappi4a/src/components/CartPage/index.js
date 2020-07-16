@@ -1,6 +1,6 @@
 import React from "react";
 
-import Header from "../Header/index";
+import Header from "../Footer/index";
 
 function CartPage() {
   return (
