@@ -11,7 +11,7 @@ export const Button = styled.button`
   border-style: none;
   letter-spacing: -0.39px;
   background-color: #e86e5a;
-  margin: 8px 0px;
+  margin-bottom: 8px;
 `;
 
 export const InputBorder = styled.div`
@@ -25,7 +25,7 @@ export const InputBorder = styled.div`
   flex-direction: column;
   
   label{
-    width: 60px;  
+    width: 78px;  
     letter-spacing: -0.29px;
     color: #b8b8b8;
     font-size: 12px;
@@ -76,7 +76,7 @@ export const Logo = styled.img`
 
 export const Tittle = styled.p`
   width: 100%;
-  margin: 12px 0px;
+  margin: 12px 0px 20px 0px;
   letter-spacing: -0.39px;
   text-align: center;
 `;
@@ -140,11 +140,13 @@ export const EditPagesForm = styled.form`
 /* GOBACK HEADER */
 
 export const GoBack = styled.div`
-  height: 44px;
+  height: 64px;
   border-bottom: 1px solid black;
   width: 100%;
   display: flex;
   align-items: center;
+  padding: 33px 0 12px 0;
+  margin-bottom: 20px; 
 
   img {
     width: 24px;

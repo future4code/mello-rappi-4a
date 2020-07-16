@@ -35,7 +35,7 @@ function SignUpPage() {
     const response = await signup(form);
     if (response.token) {
       localStorage.setItem("rappi4", JSON.stringify(response));
-      history.push("/signup-address");
+      history.replace("/signup-address");
     } else {
       window.alert(response.message);
     }
