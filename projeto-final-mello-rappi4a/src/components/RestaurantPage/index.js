@@ -30,13 +30,11 @@ import {
   ProductCategory,
   ProductCategoryBar,
 } from "./styles";
-
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
 import Button from "@material-ui/core/Button";
 import { fetchRestaurantDetail } from "../../functions/axios";
 import ReactLoading from "react-loading";
-
 
 function RestaurantPage() {
   let history = useHistory();
@@ -103,7 +101,7 @@ function RestaurantPage() {
     const categoryProducts = {
       category: item,
       products: products,
-      quantity: 0
+      quantity: 0,
     };
 
     filteredProductsArray.push(categoryProducts);
@@ -190,13 +188,13 @@ function RestaurantPage() {
             );
           })}
       </div>
-      <div
+      <Dialog
         open={showModal}
         onClose={handleCloseModal}
         fullWidth={true}
         maxWidth={"sd"}
       >
-        <div>
+        <DialogTitle>
           <p>Adicione uma quantidade</p>
           <Select onChange={handleProductQuantity}>
             <option value="0">0</option>
@@ -208,11 +206,6 @@ function RestaurantPage() {
           </Button>
         </DialogTitle>
       </Dialog>
-
-          </AddToCartButton>
-        </div>
-      </div>
-
     </RestaurantDetailPage>
   ) : (
     <LoadingContainer>
