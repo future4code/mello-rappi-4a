@@ -11,6 +11,7 @@ import {
   InputBorder,
   EditPagesForm,
   GoBack,
+  Label
 } from "./../../styles/forms";
 
 const baseUrl = "https://us-central1-missao-newton.cloudfunctions.net/rappi4A";
@@ -65,7 +66,7 @@ function EditProfilePage() {
 
       <EditPagesForm onSubmit={handleSubmit}>
         <InputBorder>
-          <label htmlFor="name">Nome</label>
+          <Label htmlFor="name">Nome</Label>
           <input
             required
             name="name"
@@ -78,7 +79,7 @@ function EditProfilePage() {
         </InputBorder>
 
         <InputBorder>
-          <label htmlFor="email">E-mail</label>
+          <Label htmlFor="email">E-mail</Label>
           <input
             required
             name="email"
@@ -91,7 +92,7 @@ function EditProfilePage() {
         </InputBorder>
 
         <InputBorder>
-          <label htmlFor="cpf">CPF</label>
+          <Label htmlFor="cpf">CPF</Label>
           <input
             required
             name="cpf"

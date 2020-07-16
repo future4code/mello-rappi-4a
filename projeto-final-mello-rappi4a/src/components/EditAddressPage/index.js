@@ -11,6 +11,7 @@ import {
   InputBorder,
   EditPagesForm,
   GoBack,
+  Label
 } from "./../../styles/forms";
 
 const baseUrl = "https://us-central1-missao-newton.cloudfunctions.net/rappi4A";
@@ -63,7 +64,7 @@ function EditAddressPage() {
 
       <EditPagesForm onSubmit={handleSubmit}>
         <InputBorder>
-          <label htmlFor="street">Logradouro*</label>
+          <Label htmlFor="street">Logradouro*</Label>
           <input
             required
             name="street"
@@ -76,7 +77,7 @@ function EditAddressPage() {
         </InputBorder>
 
         <InputBorder>
-          <label htmlFor="number">Número*</label>
+          <Label htmlFor="number">Número*</Label>
           <input
             required
             name="number"
@@ -89,7 +90,7 @@ function EditAddressPage() {
         </InputBorder>
 
         <InputBorder>
-          <label htmlFor="complement">Complemento</label>
+          <Label htmlFor="complement">Complemento</Label>
           <input
             name="complement"
             value={form.complement}
@@ -101,7 +102,7 @@ function EditAddressPage() {
         </InputBorder>
 
         <InputBorder>
-          <label htmlFor="neighbourhood">Bairro*</label>
+          <Label htmlFor="neighbourhood">Bairro*</Label>
           <input
             required
             name="neighbourhood"
@@ -114,7 +115,7 @@ function EditAddressPage() {
         </InputBorder>
 
         <InputBorder>
-          <label htmlFor="city">Cidade*</label>
+          <Label htmlFor="city">Cidade*</Label>
           <input
             required
             name="city"
@@ -127,7 +128,7 @@ function EditAddressPage() {
         </InputBorder>
 
         <InputBorder>
-          <label htmlFor="state">Estado*</label>
+          <Label htmlFor="state">Estado*</Label>
           <input
             required
             name="state"
