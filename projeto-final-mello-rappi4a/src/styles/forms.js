@@ -23,19 +23,6 @@ export const InputBorder = styled.div`
   margin-bottom: 16px;
   display: flex;
   flex-direction: column;
-  
-  label{
-    width: 78px;  
-    letter-spacing: -0.29px;
-    color: #b8b8b8;
-    font-size: 12px;
-    padding-left: 5px;
-    padding-right: 5px;
-    position:relative;
-    top:-8px;
-    left:5px;
-    background-color:white;
-  }
 
   input{
     width: 70%;
@@ -47,6 +34,20 @@ export const InputBorder = styled.div`
     padding-left: 16px;
   }
 `;
+
+export const Label =styled.label`
+  width: 60px;  
+  letter-spacing: -0.29px;
+  color: #b8b8b8;
+  font-size: 12px;
+  padding-left: 5px;
+  padding-right: 5px;
+  position:relative;
+  top:-8px;
+  left:5px;
+  background-color:white;
+  color: ${props => props.thisLabel && (props.redLabel ? "#b8b8b8" : "#e02020")};
+`
 
 /* LOGINPAGE AND SIGNUPPAGE */
 
@@ -111,21 +112,29 @@ export const SignUpTittle = styled(Tittle)`
 `;
 
 export const SignUpInputBorder = styled(InputBorder)`
-  margin-bottom: 16px;
+  margin-bottom: ${props => props.checkPassword && "0"};
   display: flex;
   flex-direction: column;
+  border-color: ${props => props.checkPassword && (props.redBorder ? "#b8b8b8" : "#e02020") };
 
-  label {
-    width: 60px;
-    top: -8px;
-  }
-
-  input {
-    left: 0px;
-    margin: 4px 0px 0px 0px;
-    padding-left: 16px;
-  }
 `;
+
+
+export const InvalidPassword = styled.p`
+  width: 193px;
+  height: 18px;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.29px;
+  color: #e02020;
+  margin: 4px 0 8px 16px;
+`
+export const Message = styled.span`
+  display: ${props => props.show ? "none" : "block"};
+`
 
 /* EDITPROFILE AND EDITADDRESS PAGES */
 

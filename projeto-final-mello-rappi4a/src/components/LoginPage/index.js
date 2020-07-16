@@ -12,6 +12,7 @@ import {
   Link,
   InputBorder,
   ShowPasswordIcon,
+  Label
 } from "./../../styles/forms";
 import logo from "../../assets/logo_colored.svg";
 import visible from "../../assets/password_open.svg";
@@ -46,7 +47,7 @@ function LoginPage() {
         <Tittle>Entrar</Tittle>
         <form onSubmit={handleFormSubmit}>
           <InputBorder>
-            <label>E-mail*</label>
+            <Label>E-mail*</Label>
             <input
               type="email"
               onChange={handleFormChange}
@@ -57,7 +58,7 @@ function LoginPage() {
             />
           </InputBorder>
           <InputBorder>
-            <label>Senha*</label>
+            <Label>Senha*</Label>
             <input
               type="password"
               onChange={handleFormChange}
