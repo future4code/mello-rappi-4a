@@ -1,5 +1,25 @@
 import styled from "styled-components";
 
+export const Title = styled.div`
+  height: 44px;
+  width: 360px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid black;
+  margin-bottom: 10px;
+  p {
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: -0.39px;
+    text-align: center;
+    color: black;
+  }
+`;
+
 export const RestaurantContainer = styled.div`
   display: flex;
   flex-direction: column;

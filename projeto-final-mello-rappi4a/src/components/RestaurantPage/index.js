@@ -29,12 +29,16 @@ import {
   ProductQuantityContainerAdded,
   ProductCategory,
   ProductCategoryBar,
+  Title,
 } from "./styles";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
 import Button from "@material-ui/core/Button";
 import { fetchRestaurantDetail } from "../../functions/axios";
 import ReactLoading from "react-loading";
+import ArrowBack from "./../../assets/arrow_back.svg";
+
+import { GoBack } from "./../../styles/forms";
 
 function RestaurantPage() {
   let history = useHistory();
@@ -64,6 +68,11 @@ function RestaurantPage() {
 
   const [restaurantDetail, setRestaurantDetail] = useState();
 
+  useEffect(() => {
+    setToken(localStorage.getItem("token"));
+    fetchDetails();
+  }, []);
+
   const axiosConfig =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ing3eDdYcEh3Y0xLR2oxQnpYalVNIiwibmFtZSI6ImxvdXJlbmNvIHBhc3NvcyIsImVtYWlsIjoibHBhc3Nvc0BnbWFpbC5jb20iLCJjcGYiOiIwMzEtOTQ5LTEzMC0yMSIsImhhc0FkZHJlc3MiOnRydWUsImFkZHJlc3MiOiJCYXLDo28gZG8gQW1hem9uYXMsIDU0MiwgMTAzLCAxMDIgLSBCYXLDo28iLCJpYXQiOjE1OTQ2Njk4NDd9.Uo3uW6VOCdLmdbrJx6qNp1WP66juoszFywTXIixaldY";
 
@@ -71,11 +80,6 @@ function RestaurantPage() {
     const response = await fetchRestaurantDetail(1, axiosConfig);
     setRestaurantDetail(response);
   };
-
-  useEffect(() => {
-    // setToken(localStorage.getItem("token"));
-    fetchDetails();
-  }, []);
 
   // Lógica para mostrar os produtos conforme suas categorias
 
@@ -138,9 +142,10 @@ function RestaurantPage() {
 
   const render = restaurantDetail ? (
     <RestaurantDetailPage>
-      <button onClick={fetchDetails}>Teste Restaurant</button>
-      <button onClick={goToFeedPage}>Home</button>
-      <div>Restaurante</div>
+      <GoBack>
+        <img src={ArrowBack} alt={"Voltar"} onClick={goToFeedPage} />
+        <span>Restaurante</span>
+      </GoBack>
       <RestaurantContainer>
         <RestaurantLogo src={restaurantDetail.restaurant.logoUrl} />
         <RestaurantTitle>{restaurantDetail.restaurant.name}</RestaurantTitle>
