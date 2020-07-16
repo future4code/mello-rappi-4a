@@ -21,4 +21,18 @@ export const login = async (body) => {
     }
 } 
 
+export const signupAddress = async (body) => {
+    const axiosConfig = {
+        headers: {
+          auth: JSON.parse(localStorage.getItem("rappi4")).token,
+        },
+      };
+    try {
+        const response = await axios.put(`${baseUrl}/address`, body, axiosConfig)
+        return response.data
+    } catch (error) {
+        return error.response.data
+    }
+}
+
  
