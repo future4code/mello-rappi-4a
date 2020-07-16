@@ -44,6 +44,18 @@ function EditProfilePage() {
     }
   };
 
+  const cpfMask = (cpf) => {
+    cpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g,"\$1.\$2.\$3\-\$4");
+    return cpf
+  }
+
+  const handleCpfChange = (event) => {
+    event.target.value = cpfMask(event.target.value)
+    if (event.target.value.length <= 14) {
+      handleFormChange(event)
+    }
+  }
+
   return (
     <div>
       <GoBack>
@@ -84,10 +96,11 @@ function EditProfilePage() {
             required
             name="cpf"
             value={form.cpf}
-            onChange={handleFormChange}
+            onChange={handleCpfChange}
             id="cpf"
-            type="number"
+            type="text"
             placeholder="CPF"
+            pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
           />
         </InputBorder>
 
