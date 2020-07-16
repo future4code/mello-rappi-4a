@@ -3,7 +3,7 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 
 import useForm from "../../hooks/useForm";
-import { signupAddress } from "../../functions/axios"
+import { signupAddress } from "../../functions/axios";
 
 import ArrowBack from "./../../assets/arrow_back.svg";
 
@@ -14,8 +14,6 @@ import {
   EditPagesForm,
   GoBack,
 } from "./../../styles/forms";
-
-
 
 function SignUpAddressPage() {
   const history = useHistory();
@@ -33,17 +31,16 @@ function SignUpAddressPage() {
     complement: "",
   });
 
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     const response = await signupAddress(form);
-    console.log(response)
+    console.log(response);
     if (response.token) {
-      history.replace("/feed")
+      history.replace("/feed");
     } else {
-      window.alert(response.message)
+      window.alert(response.message);
     }
-  }
+  };
 
   return (
     <div>
@@ -88,7 +85,7 @@ function SignUpAddressPage() {
             onChange={handleFormChange}
             id="complement"
             type="text"
-            placeholder="Apto./Bloco"
+            placeholder="Apto. ou Bloco"
           />
         </InputBorder>
 
