@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import {
   RestaurantContainer,
@@ -8,9 +8,33 @@ import {
   ProductImage,
   AddToCartButton,
   Select,
+  LoadingContainer,
+  ProductCard,
+  ProductDescriptionContainer,
+  ProductTitle,
+  ProductDescription,
+  ProductPrice,
+  AddToCart,
+  AddToCartContainer,
+  ProductQuantityContainer,
+  ProductQuantity,
+  RestaurantTitle,
+  RestaurantCategory,
+  RestaurantDeliveryTime,
+  RestaurantDeliveryPrice,
+  RestaurantAdress,
+  RemoveFromCart,
+  RemoveFromCartContainer,
+  ProductQuantityAdded,
+  ProductQuantityContainerAdded,
+  ProductCategory,
+  ProductCategoryBar,
 } from "./styles";
-//import DialogTitle from "@material-ui/core/DialogTitle";
-//import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Dialog from "@material-ui/core/Dialog";
+import Button from "@material-ui/core/Button";
+import { fetchRestaurantDetail } from "../../functions/axios";
+import ReactLoading from "react-loading";
 
 function RestaurantPage() {
   let history = useHistory();
@@ -19,7 +43,9 @@ function RestaurantPage() {
     history.push("/feed");
   };
   const [showModal, setShowModal] = useState(false);
-  const [quantity, setQuantity] = useState(0);
+  let [quantity, setQuantity] = useState(0);
+  const [token, setToken] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const handleShowModal = () => {
     setShowModal(true);
@@ -32,160 +58,165 @@ function RestaurantPage() {
     console.log(quantity);
   };
 
-  const [restaurantDetail, setRestaurantDetail] = useState({
-    restaurant: {
-      products: [
-        {
-          id: "CnKdjU6CyKakQDGHzNln",
-          category: "Salgado",
-          price: "1",
-          photoUrl:
-            "https://static-images.ifood.com.br/image/upload/f_auto,t_high/pratos/65c38aa8-b094-413d-9a80-ddc256bfcc78/201907031404_66194495.jpg",
-          name: "Bibsfiha carne",
-          description: "Esfiha deliciosa, receita secreta do Habibs.",
-        },
-        {
-          id: "KJqMl2DxeShkSBevKVre",
-          photoUrl:
-            "https://www.sushimanscwb.com.br/wp-content/uploads/2018/10/1579_REFRIGERANTE_LATA_-_350ml_17d2e336feb44a2696fd6cf852c41b50-1.jpeg",
-          name: "Refrigerante",
-          description: "Coca cola, Sprite ou Guaraná",
-          category: "Bebida",
-          price: "4",
-        },
-        {
-          id: "SmT6MYMm8QC8riHYApzt",
-          name: "Batata Frita",
-          description: "Batata frita crocante e sequinha.",
-          category: "Acompanhamento",
-          price: "9,50",
-          photoUrl:
-            "https://static-images.ifood.com.br/image/upload/f_auto,t_high/pratos/65c38aa8-b094-413d-9a80-ddc256bfcc78/201907031409_66194560.jpg",
-        },
-        {
-          id: "V5VhD0xmsN7p1RvIDyhs",
-          name: "Beirute",
-          description: "",
-          category: "Lanche",
-          price: "22,90",
-          photoUrl:
-            "https://static-images.ifood.com.br/image/upload/f_auto,t_high/pratos/65c38aa8-b094-413d-9a80-ddc256bfcc78/201907031424_66194598.jpg",
-        },
-        {
-          id: "ZrZm51AIbZ26MVAifuaJ",
-          name: "Pizza",
-          description: "",
-          category: "Pizza",
-          price: "31,90",
-          photoUrl:
-            "https://static-images.ifood.com.br/image/upload/f_auto,t_high/pratos/65c38aa8-b094-413d-9a80-ddc256bfcc78/201907031245_66194219.jpg",
-        },
-        {
-          id: "dixrjmRJvcBER8pivj9X",
-          name: "Bibsfiha queijo",
-          description: "Esfiha deliciosa, receita secreta do Habibs.",
-          category: "Salgado",
-          price: "1",
-          photoUrl:
-            "https://static-images.ifood.com.br/image/upload/f_auto,t_high/pratos/65c38aa8-b094-413d-9a80-ddc256bfcc78/201907031403_66194479.jpg",
-        },
-        {
-          id: "hYGe0I6HUpItn57SPINc",
-          category: "Salgado",
-          price: "1",
-          photoUrl:
-            "https://static-images.ifood.com.br/image/upload/f_auto,t_high/pratos/65c38aa8-b094-413d-9a80-ddc256bfcc78/201907151009_76679579.jpg",
-          name: "Bibsfiha frango",
-          description: "Esfiha deliciosa, receita secreta do Habibs.",
-        },
-        {
-          id: "hwTEJXaj2mvR17oUTwm2",
-          photoUrl:
-            "https://static-images.ifood.com.br/image/upload/f_auto,t_high/pratos/65c38aa8-b094-413d-9a80-ddc256bfcc78/201907031439_71805445.jpg",
-          name: "Suco",
-          description: "Laranja, Acerola ou Maçã",
-          category: "Bebida",
-          price: "7,90",
-        },
-        {
-          id: "po7B72myMyfKhtEe0mxv",
-          name: "Kibe",
-          description: "",
-          category: "Salgado",
-          price: "5,50",
-          photoUrl:
-            "https://static-images.ifood.com.br/image/upload/f_auto,t_high/pratos/65c38aa8-b094-413d-9a80-ddc256bfcc78/201907031407_66194536.jpg",
-        },
-        {
-          id: "q38byozxbUUidlVmpSXa",
-          name: "Pastel",
-          description: "",
-          category: "Pastel",
-          price: "3",
-          photoUrl:
-            "https://static-images.ifood.com.br/image/upload/f_auto,t_high/pratos/65c38aa8-b094-413d-9a80-ddc256bfcc78/201907031408_66194519.jpg",
-        },
-      ],
-      id: "1",
-      name: "Habibs",
-      logoUrl: "http://soter.ninja/futureFoods/logos/habibs.jpg",
-      deliveryTime: 60,
-      category: "Árabe",
-      description:
-        "Habib's é uma rede de restaurantes de comida rápida brasileira especializada em culinária árabe, os restaurantes vendem mais de 600 milhões de esfirras por ano. A empresa emprega 22 mil colaboradores e tem 421 unidades distribuídas em mais de cem municípios em 20 unidades federativas.",
-      shipping: 6,
-      address: "Rua das Margaridas, 110 - Jardim das Flores",
-    },
-  });
-  return (
+  const removeFromCart = () => {
+    setQuantity((quantity -= 1));
+  };
+
+  const [restaurantDetail, setRestaurantDetail] = useState();
+
+  const axiosConfig =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ing3eDdYcEh3Y0xLR2oxQnpYalVNIiwibmFtZSI6ImxvdXJlbmNvIHBhc3NvcyIsImVtYWlsIjoibHBhc3Nvc0BnbWFpbC5jb20iLCJjcGYiOiIwMzEtOTQ5LTEzMC0yMSIsImhhc0FkZHJlc3MiOnRydWUsImFkZHJlc3MiOiJCYXLDo28gZG8gQW1hem9uYXMsIDU0MiwgMTAzLCAxMDIgLSBCYXLDo28iLCJpYXQiOjE1OTQ2Njk4NDd9.Uo3uW6VOCdLmdbrJx6qNp1WP66juoszFywTXIixaldY";
+
+  const fetchDetails = async () => {
+    const response = await fetchRestaurantDetail(1, axiosConfig);
+    setRestaurantDetail(response);
+  };
+
+  useEffect(() => {
+    // setToken(localStorage.getItem("token"));
+    fetchDetails();
+  }, []);
+
+  // Lógica para mostrar os produtos conforme suas categorias
+
+  const restaurantCategory =
+    restaurantDetail &&
+    restaurantDetail.restaurant.products.map((product) => {
+      return product.category;
+    });
+
+  let productList = restaurantDetail && restaurantDetail.restaurant.products;
+
+  const onlySetRestaurantCategory = new Set(restaurantCategory);
+  const noDuplicatesRestaurantCategory = [...onlySetRestaurantCategory];
+
+  let filteredProductsArray = [];
+
+  const filterProduct = (item) => {
+    const products = productList.filter((product) => {
+      if (product.category === item) {
+        return product;
+      }
+    });
+    const categoryProducts = {
+      category: item,
+      products: products,
+      quantity: 0,
+    };
+
+    filteredProductsArray.push(categoryProducts);
+    return filteredProductsArray;
+  };
+
+  noDuplicatesRestaurantCategory.forEach(filterProduct);
+
+  restaurantDetail && console.log(filteredProductsArray);
+
+  // Ternário que define qual botão vai aparecer conforme o número de quantidades em um carrinho
+
+  const addRemoveProducts =
+    quantity >= 1 ? (
+      <RemoveFromCartContainer>
+        <RemoveFromCart onClick={removeFromCart}>Remover</RemoveFromCart>
+      </RemoveFromCartContainer>
+    ) : (
+      <AddToCartContainer>
+        <AddToCart onClick={handleShowModal}>Adicionar</AddToCart>
+      </AddToCartContainer>
+    );
+
+  // Ternário que mostra ou não o número de quantidade do produto
+
+  const productQuantity =
+    quantity >= 1 ? (
+      <ProductQuantityContainerAdded>
+        <ProductQuantityAdded>{quantity}</ProductQuantityAdded>
+      </ProductQuantityContainerAdded>
+    ) : (
+      <div></div>
+    );
+
+  const render = restaurantDetail ? (
     <RestaurantDetailPage>
+      <button onClick={fetchDetails}>Teste Restaurant</button>
       <button onClick={goToFeedPage}>Home</button>
+      <div>Restaurante</div>
       <RestaurantContainer>
         <RestaurantLogo src={restaurantDetail.restaurant.logoUrl} />
-        <p>{restaurantDetail.restaurant.name}</p>
-        <p>{restaurantDetail.restaurant.category}</p>
+        <RestaurantTitle>{restaurantDetail.restaurant.name}</RestaurantTitle>
+        <RestaurantCategory>
+          {restaurantDetail.restaurant.category}
+        </RestaurantCategory>
         <div>
-          <span>{restaurantDetail.restaurant.deliveryTime} min</span> -{" "}
-          <span> Frete R${restaurantDetail.restaurant.shipping}</span>
+          <RestaurantDeliveryTime>
+            {restaurantDetail.restaurant.deliveryTime} min
+          </RestaurantDeliveryTime>
+          <RestaurantDeliveryPrice>
+            Frete R${restaurantDetail.restaurant.shipping}
+          </RestaurantDeliveryPrice>
         </div>
-        <p>{restaurantDetail.restaurant.adress}</p>
+        <RestaurantAdress>
+          {restaurantDetail.restaurant.address}
+        </RestaurantAdress>
       </RestaurantContainer>
       <div>
-        <p>Principais</p>
-        <hr />
-        <p>Salgados</p>
-        {restaurantDetail.restaurant.products.map((product) => {
-          if (product.category === "Salgado") {
+        {restaurantDetail &&
+          filteredProductsArray.map((menu) => {
             return (
-              <ProductContainer>
-                <ProductImage src={product.photoUrl} />
-                <p>{product.name}</p>
-                <p>{product.description}</p>
-                <button onClick={handleShowModal}>Adicionar</button>
-              </ProductContainer>
+              <div>
+                <ProductCategory>{menu.category}</ProductCategory>
+                <ProductCategoryBar />
+                {menu.products.map((product) => {
+                  return (
+                    <ProductContainer>
+                      <ProductCard>
+                        <ProductImage src={product.photoUrl} />
+                        <ProductDescriptionContainer>
+                          <ProductTitle>{product.name}</ProductTitle>
+                          <ProductDescription>
+                            {product.description}
+                            <ProductPrice>R$ {product.price}</ProductPrice>
+                          </ProductDescription>
+                        </ProductDescriptionContainer>
+                        <div>{addRemoveProducts}</div>
+                        <div>{productQuantity}</div>
+                      </ProductCard>
+                    </ProductContainer>
+                  );
+                })}
+              </div>
             );
-          }
-        })}
+          })}
       </div>
-      <div
+      <Dialog
         open={showModal}
         onClose={handleCloseModal}
         fullWidth={true}
         maxWidth={"sd"}
       >
-        <div>
+        <DialogTitle>
           <p>Adicione uma quantidade</p>
           <Select onChange={handleProductQuantity}>
             <option value="0">0</option>
             <option value="1">1</option>
             <option value="2">2</option>
           </Select>
-          <AddToCartButton onClick={handleCloseModal}>
+          <Button color="primary" onClick={handleCloseModal}>
             Adicionar ao carrinho
-          </AddToCartButton>
-        </div>
-      </div>
+          </Button>
+        </DialogTitle>
+      </Dialog>
     </RestaurantDetailPage>
+  ) : (
+    <LoadingContainer>
+      <ReactLoading type="spin" color="#ff3b30" />{" "}
+    </LoadingContainer>
+  );
+  return (
+    <div>
+      {render}
+      <div></div>
+    </div>
   );
 }
 
