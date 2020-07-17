@@ -29,10 +29,10 @@ function LoginPage() {
     const response = await login(form);
     if (response.token) {
       localStorage.setItem("rappi4", JSON.stringify(response));
-      history.push("/feed");
+      history.replace("/feed");
     } else {
       window.alert(response.message);
-      history.push("/signup");
+      history.replace("/signup");
     }
   };
 

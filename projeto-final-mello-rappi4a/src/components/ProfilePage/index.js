@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
-import Header from "../Header";
+import Footer from "../Footer";
 
 import Edit from "./../../assets/edit.svg";
 
@@ -165,7 +165,7 @@ function ProfilePage() {
           </div>
         )}
       </OrderHistory>
-      <Header />
+      <Footer />
     </div>
   );
 }

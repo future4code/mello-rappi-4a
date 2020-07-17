@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const HeaderBox = styled.div`
+export const FooterBox = styled.div`
   position: fixed;
   bottom: 0;
 

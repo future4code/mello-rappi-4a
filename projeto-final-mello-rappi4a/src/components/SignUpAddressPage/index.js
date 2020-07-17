@@ -3,24 +3,20 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 
 import useForm from "../../hooks/useForm";
+import { signupAddress } from "../../functions/axios";
 
 import ArrowBack from "./../../assets/arrow_back.svg";
 
 import {
+  Tittle,
   Button,
   InputBorder,
   EditPagesForm,
   GoBack,
 } from "./../../styles/forms";
 
-const baseUrl = "https://us-central1-missao-newton.cloudfunctions.net/rappi4A";
-
 function SignUpAddressPage() {
-  let history = useHistory();
-
-  const goToFeedPage = () => {
-    history.push("/feed");
-  };
+  const history = useHistory();
 
   const goToSignUpPage = () => {
     history.push("/signup");
@@ -35,27 +31,15 @@ function SignUpAddressPage() {
     complement: "",
   });
 
-  const token = localStorage.getItem("token");
-
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    const axiosConfig = {
-      headers: {
-        Authorization: token,
-      },
-    };
-
-    try {
-      const response = await axios.put(`${baseUrl}/profile`, form, axiosConfig);
-      console.log(response);
-      alert("Dados alterados com sucesso");
-    } catch (error) {
-      console.log(error);
-      alert("Não foi possível alterar");
+    const response = await signupAddress(form);
+    console.log(response);
+    if (response.token) {
+      history.replace("/feed");
+    } else {
+      window.alert(response.message);
     }
-
-    goToFeedPage();
   };
 
   return (
@@ -65,7 +49,7 @@ function SignUpAddressPage() {
       </GoBack>
 
       <EditPagesForm onSubmit={handleSubmit}>
-        <p>Meu endereço</p>
+        <Tittle>Meu endereço</Tittle>
 
         <InputBorder>
           <label htmlFor="street">Logradouro*</label>
@@ -88,7 +72,7 @@ function SignUpAddressPage() {
             value={form.number}
             onChange={handleFormChange}
             id="number"
-            type="number"
+            type="text"
             placeholder="Número"
           />
         </InputBorder>
@@ -101,7 +85,7 @@ function SignUpAddressPage() {
             onChange={handleFormChange}
             id="complement"
             type="text"
-            placeholder="Apto./Bloco"
+            placeholder="Apto. ou Bloco"
           />
         </InputBorder>
 

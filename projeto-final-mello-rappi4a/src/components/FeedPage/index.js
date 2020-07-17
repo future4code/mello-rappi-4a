@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import Header from "../Header/index";
+import Footer from "../Footer/index";
 
 function FeedPage() {
   let history = useHistory();
@@ -20,7 +20,7 @@ function FeedPage() {
       FeedPage
       <button onClick={goToSearchPage}>Buscar</button>
       <button onClick={goToRestaurantPage}>Restaurante</button>
-      <Header />
+      <Footer />
     </div>
   );
 }
