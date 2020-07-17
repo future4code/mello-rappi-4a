@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import {
   RestaurantContainer,
@@ -31,14 +31,17 @@ import {
   ProductCategoryBar,
   Title,
 } from "./styles";
+import { GoBack } from "./../../styles/forms";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
 import Button from "@material-ui/core/Button";
-import { fetchRestaurantDetail } from "../../functions/axios";
-import ReactLoading from "react-loading";
+
 import ArrowBack from "./../../assets/arrow_back.svg";
 
-import { GoBack } from "./../../styles/forms";
+import { fetchRestaurantDetail } from "../../functions/axios";
+import ReactLoading from "react-loading";
+
+import cartContext from "../../context/cart";
 
 function RestaurantPage() {
   let history = useHistory();
@@ -48,8 +51,11 @@ function RestaurantPage() {
   };
   const [showModal, setShowModal] = useState(false);
   let [quantity, setQuantity] = useState(0);
+
   const [token, setToken] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const { cart, dispatch } = useContext(cartContext);
 
   const handleShowModal = () => {
     setShowModal(true);
@@ -59,7 +65,6 @@ function RestaurantPage() {
   };
   const handleProductQuantity = (event) => {
     setQuantity(event.target.value);
-    console.log(quantity);
   };
 
   const removeFromCart = () => {
@@ -114,8 +119,6 @@ function RestaurantPage() {
 
   noDuplicatesRestaurantCategory.forEach(filterProduct);
 
-  restaurantDetail && console.log(filteredProductsArray);
-
   // Ternário que define qual botão vai aparecer conforme o número de quantidades em um carrinho
 
   const addRemoveProducts =
@@ -157,7 +160,7 @@ function RestaurantPage() {
             {restaurantDetail.restaurant.deliveryTime} min
           </RestaurantDeliveryTime>
           <RestaurantDeliveryPrice>
-            Frete R${restaurantDetail.restaurant.shipping}
+            Frete R${restaurantDetail.restaurant.shipping.toFixed(2)}
           </RestaurantDeliveryPrice>
         </div>
         <RestaurantAdress>
@@ -180,7 +183,9 @@ function RestaurantPage() {
                           <ProductTitle>{product.name}</ProductTitle>
                           <ProductDescription>
                             {product.description}
-                            <ProductPrice>R$ {product.price}</ProductPrice>
+                            <ProductPrice>
+                              R$ {product.price.toFixed(2)}
+                            </ProductPrice>
                           </ProductDescription>
                         </ProductDescriptionContainer>
                         <div>{addRemoveProducts}</div>
