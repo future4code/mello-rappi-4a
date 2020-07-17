@@ -54,7 +54,6 @@ function SignUpPage() {
     } else {
       setEqualPasswords(true)
     }
-    
   }
 
   const handleFormSubmit = async (event) => {
@@ -76,7 +75,7 @@ function SignUpPage() {
     }
   };
 
-  console.log(form)
+  
 
   return (
     <PageContainer>
