@@ -34,7 +34,7 @@ const Router = () => {
           {/* <DocumentTitle title="Home"> */}       
         <ProtectedRoute exact path="/profile" component={ProfilePage} />
           {/* <DocumentTitle title="Seu perfil"> */}      
-        <ProtectedRoute exact path="/restaurant" component={RestaurantPage} />
+        <ProtectedRoute exact path="/restaurant/:restaurantId" component={RestaurantPage} />
           {/* <DocumentTitle title="Restaurante"> */}
         <ProtectedRoute exact path="/search" component={SearchPage} />
           {/* <DocumentTitle title="Buscar"> */}   

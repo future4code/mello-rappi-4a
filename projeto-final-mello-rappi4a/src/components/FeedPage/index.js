@@ -65,6 +65,10 @@ function FeedPage(props) {
     history.push("/search");
   };
 
+  const goToRestaurantPage = (restaurantId) => {
+    history.push(`/restaurant/${restaurantId}`);
+  };
+
   return (
     <FeedContainer>
       <ContainerTitle>
@@ -93,7 +97,7 @@ function FeedPage(props) {
         ) : (
           selectRestaurant.map((item) => {
             return (
-              <RestaurantContainer key={item.id}>
+              <RestaurantContainer key={item.id} onClick={() => goToRestaurantPage(item.id)}>
                 <RestaurantCard>
                   <img src={item.logoUrl} alt="Logo do restaurante" />
                   <p>{item.name}</p>
