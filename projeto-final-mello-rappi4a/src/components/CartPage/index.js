@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer, useContext } from "react";
 import {
   Title,
   AddressInfo,
@@ -9,12 +9,19 @@ import {
   PaymentMethodContainer,
   ConfirmButton,
 } from "./styles";
-import axios from "axios";
-import ReactLoading from "react-loading";
 
 import Footer from "../Footer/index";
 
+import axios from "axios";
+import ReactLoading from "react-loading";
+
+import cartContext from "../../context/cart";
+
 function CartPage() {
+  const { cart, dispatch } = useContext(cartContext);
+  const [cartProducts, setCartProducts] = useState([cart.products]);
+  const [cartSubtotal, setCartSubtotal] = useState([cart.subtotal]);
+
   const [user, setUser] = useState([]);
   const [loading, setLoading] = useState(true);
   const baseUrl =
@@ -61,7 +68,6 @@ function CartPage() {
           )}
         </div>
       </AddressInfo>
-
       <PaymentMethodContainer>
         <PaymentMethodTitle>
           <p>Forma de Pagamento</p>
