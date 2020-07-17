@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import Header from "../Header/index";
 import axios from "axios";
 import CardRestaurant from "./CardRestaurant";
+import Footer from "../Footer/index";
 
 import searchIcon from "../../assets/search.svg"
 import { 

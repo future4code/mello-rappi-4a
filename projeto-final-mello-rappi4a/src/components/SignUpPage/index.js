@@ -10,6 +10,9 @@ import {
   SignUpMainContent,
   SignUpTittle,
   SignUpInputBorder,
+  InvalidPassword,
+  Message,
+  Label
 } from "./../../styles/forms";
 
 import logo from "../../assets/logo_colored.svg";
@@ -22,6 +25,7 @@ function SignUpPage() {
   const [visibleConfirmedPassword, setVisibleConfirmedPassword] = useState(
     false
   );
+  const [equalPasswords, setEqualPasswords] = useState(true)
   const [form, handleFormChange] = useForm({
     name: "",
     email: "",
@@ -29,13 +33,35 @@ function SignUpPage() {
     password: "",
     confirmPassword: "",
   });
+   
+
+  const cpfMask = (cpf) => {
+    cpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g,"\$1.\$2.\$3\-\$4");
+    return cpf
+  }
+
+  const handleCpfChange = (event) => {
+    event.target.value = cpfMask(event.target.value)
+    if (event.target.value.length <= 14) {
+      handleFormChange(event)
+    }
+  }
+
+  const checkEqualPasswords = (event) => {
+    handleFormChange(event)
+    if(event.target.value !== form.password && event.target.value !== form.confirmPassword) {
+      setEqualPasswords(false)
+    } else {
+      setEqualPasswords(true)
+    }
+  }
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     const response = await signup(form);
     if (response.token) {
       localStorage.setItem("rappi4", JSON.stringify(response));
-      history.push("/signup-address");
+      history.replace("/signup-address");
     } else {
       window.alert(response.message);
     }
@@ -49,6 +75,8 @@ function SignUpPage() {
     }
   };
 
+  
+
   return (
     <PageContainer>
       <Logo src={logo} alt="rappi4 logo" />
@@ -56,7 +84,7 @@ function SignUpPage() {
         <SignUpTittle>Cadastrar</SignUpTittle>
         <form onSubmit={handleFormSubmit}>
           <SignUpInputBorder>
-            <label htmlFor="name">Nome*</label>
+            <Label htmlFor="name">Nome*</Label>
             <input
               onChange={handleFormChange}
               id="name"
@@ -68,7 +96,7 @@ function SignUpPage() {
             />
           </SignUpInputBorder>
           <SignUpInputBorder>
-            <label htmlFor="email">E-mail*</label>
+            <Label htmlFor="email">E-mail*</Label>
             <input
               onChange={handleFormChange}
               id="email"
@@ -80,49 +108,65 @@ function SignUpPage() {
             />
           </SignUpInputBorder>
           <SignUpInputBorder>
-            <label htmlFor="cpf">CPF*</label>
+            <Label htmlFor="cpf">CPF*</Label>
             <input
-              onChange={handleFormChange}
+              onChange={handleCpfChange}
               id="cpf"
               name="cpf"
               value={form.cpf}
               type="text"
               placeholder="000.000.000-00"
               required
+              pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
             />
           </SignUpInputBorder>
           <SignUpInputBorder>
-            <label htmlFor="password">Senha*</label>
+            <Label htmlFor="password">Senha*</Label>
             <input
-              onChange={handleFormChange}
+              onChange={checkEqualPasswords}
               id="password"
               name="password"
               value={form.password}
               type={visiblePassword ? "text" : "password"}
               placeholder="Mínimo 6 caracteres"
               required
+              pattern=".{6,}"
             />
             <ShowPasswordIcon
               onClick={() => handleClickShowPassword("PASSWORD")}
               src={visiblePassword ? noVisible : visible}
             />
           </SignUpInputBorder>
-          <SignUpInputBorder>
-            <label htmlFor="confirmPassword">Confirmar*</label>
-            <input
-              onChange={handleFormChange}
-              id="confirmPassword"
-              name="confirmPassword"
-              value={form.confirmPassword}
-              type={visibleConfirmedPassword ? "text" : "password"}
-              placeholder="Confirme a senha anterior"
-              required
-            />
-            <ShowPasswordIcon
-              onClick={() => handleClickShowPassword("CONFIRM_PASSWORD")}
-              src={visibleConfirmedPassword ? noVisible : visible}
-            />
-          </SignUpInputBorder>
+            <SignUpInputBorder 
+              redBorder={equalPasswords} 
+              checkPassword
+            >
+                
+              <Label 
+                thisLabel
+                redLabel={equalPasswords} 
+                htmlFor="confirmPassword"
+              >
+                Confirmar*
+              </Label>
+              <input
+                onChange={checkEqualPasswords}
+                id="confirmPassword"
+                name="confirmPassword"
+                value={form.confirmPassword}
+                type={visibleConfirmedPassword ? "text" : "password"}
+                placeholder="Confirme a senha anterior"
+                required
+              />
+              <ShowPasswordIcon
+                onClick={() => handleClickShowPassword("CONFIRM_PASSWORD")}
+                src={visibleConfirmedPassword ? noVisible : visible}
+              />
+            </SignUpInputBorder>
+            <InvalidPassword redBorder={equalPasswords}>
+              <Message show={equalPasswords}>Deve ser a mesma que a anterior</Message>
+            </InvalidPassword>
+          
           <Button type="submit">Criar</Button>
         </form>
       </SignUpMainContent>

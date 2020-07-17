@@ -11,6 +11,7 @@ import {
   InputBorder,
   EditPagesForm,
   GoBack,
+  Label
 } from "./../../styles/forms";
 
 const baseUrl = "https://us-central1-missao-newton.cloudfunctions.net/rappi4A";
@@ -44,6 +45,18 @@ function EditProfilePage() {
     }
   };
 
+  const cpfMask = (cpf) => {
+    cpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g,"\$1.\$2.\$3\-\$4");
+    return cpf
+  }
+
+  const handleCpfChange = (event) => {
+    event.target.value = cpfMask(event.target.value)
+    if (event.target.value.length <= 14) {
+      handleFormChange(event)
+    }
+  }
+
   return (
     <div>
       <GoBack>
@@ -53,7 +66,7 @@ function EditProfilePage() {
 
       <EditPagesForm onSubmit={handleSubmit}>
         <InputBorder>
-          <label htmlFor="name">Nome</label>
+          <Label htmlFor="name">Nome</Label>
           <input
             required
             name="name"
@@ -66,7 +79,7 @@ function EditProfilePage() {
         </InputBorder>
 
         <InputBorder>
-          <label htmlFor="email">E-mail</label>
+          <Label htmlFor="email">E-mail</Label>
           <input
             required
             name="email"
@@ -79,15 +92,16 @@ function EditProfilePage() {
         </InputBorder>
 
         <InputBorder>
-          <label htmlFor="cpf">CPF</label>
+          <Label htmlFor="cpf">CPF</Label>
           <input
             required
             name="cpf"
             value={form.cpf}
-            onChange={handleFormChange}
+            onChange={handleCpfChange}
             id="cpf"
-            type="number"
+            type="text"
             placeholder="CPF"
+            pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
           />
         </InputBorder>
 
