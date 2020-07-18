@@ -41,9 +41,12 @@ import ArrowBack from "./../../assets/arrow_back.svg";
 import { fetchRestaurantDetail } from "../../functions/axios";
 import ReactLoading from "react-loading";
 
+import { useParams } from "react-router-dom";
+
 import cartContext from "../../context/cart";
 
 function RestaurantPage() {
+  const restaurantId = useParams();
   let history = useHistory();
 
   const goToFeedPage = () => {
@@ -82,7 +85,7 @@ function RestaurantPage() {
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ing3eDdYcEh3Y0xLR2oxQnpYalVNIiwibmFtZSI6ImxvdXJlbmNvIHBhc3NvcyIsImVtYWlsIjoibHBhc3Nvc0BnbWFpbC5jb20iLCJjcGYiOiIwMzEtOTQ5LTEzMC0yMSIsImhhc0FkZHJlc3MiOnRydWUsImFkZHJlc3MiOiJCYXLDo28gZG8gQW1hem9uYXMsIDU0MiwgMTAzLCAxMDIgLSBCYXLDo28iLCJpYXQiOjE1OTQ2Njk4NDd9.Uo3uW6VOCdLmdbrJx6qNp1WP66juoszFywTXIixaldY";
 
   const fetchDetails = async () => {
-    const response = await fetchRestaurantDetail(1, axiosConfig);
+    const response = await fetchRestaurantDetail(restaurantId.restaurantId, axiosConfig);
     setRestaurantDetail(response);
   };
 
