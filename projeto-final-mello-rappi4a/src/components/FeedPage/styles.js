@@ -94,6 +94,7 @@ export const Label = styled.label`
   font-family: "Roboto";
   font-size: 16px;
   letter-spacing: -0.39px;
+  color: ${props => (props.value === props.selected) ? "#e86e5a" : "#00000" }
 `
 
 export const SectionRestaurant = styled.div`
