@@ -1,14 +1,19 @@
 import React from "react";
-
+import { useHistory } from "react-router-dom";
 
 import { RestaurantContainer, RestaurantCard } from "./styles"
 
 const CardRestaurant = (props) => {
+  const history = useHistory();
+
+  const goToRestaurantPage = (restaurantId) => {
+    history.push(`/restaurant/${restaurantId}`);
+  };
   
   return (
     
       <RestaurantContainer>
-        <RestaurantCard >
+        <RestaurantCard onClick={(() => goToRestaurantPage(props.id))} >
           <img src={props.logoUrl} alt="Logo do restaurante" />
           <p>{props.name}</p>
           <article>

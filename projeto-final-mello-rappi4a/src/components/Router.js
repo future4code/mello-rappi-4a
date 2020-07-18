@@ -28,7 +28,7 @@ const Router = () => {
         <ProtectedRoute exact path="/edit-profile" component={EditProfilePage} />
         <ProtectedRoute exact path="/feed" component={FeedPage} />     
         <ProtectedRoute exact path="/profile" component={ProfilePage} />      
-        <ProtectedRoute exact path="/restaurant" component={RestaurantPage} />
+        <ProtectedRoute exact path="/restaurant/:restaurantId" component={RestaurantPage} />
         <ProtectedRoute exact path="/search" component={SearchPage} /> 
         <ProtectedRoute exact path="/signup-address" component={SignUpAddressPage} />
       </Switch>

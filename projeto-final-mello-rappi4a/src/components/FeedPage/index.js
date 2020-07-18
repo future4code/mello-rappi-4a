@@ -85,6 +85,7 @@ function FeedPage(props) {
       const renderedList = list.map(restaurant => {
       return <CardRestaurant 
         key={restaurant.id}
+        id={restaurant.id}
         logoUrl={restaurant.logoUrl}
         name={restaurant.name}
         deliveryTime={restaurant.deliveryTime}
