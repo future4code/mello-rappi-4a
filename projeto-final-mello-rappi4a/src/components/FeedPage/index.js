@@ -129,6 +129,8 @@ function FeedPage() {
           return (
             <article key={category}>
               <Label 
+                value={category}
+                selected={selectedCategory}
                 onClick={() => handleClickCategory(category)}
               >
                 {category}
