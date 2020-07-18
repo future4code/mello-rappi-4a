@@ -1,6 +1,6 @@
 import React from "react";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
-import DocumentTitle from "react-document-title";
+
 
 import SplashScreen from "./SplashScreen"
 import CartPage from "./CartPage/index";
@@ -23,23 +23,14 @@ const Router = () => {
         <Route exact path="/" component={SplashScreen} />
         <Route exact path="/login" component={LoginPage} />
         <Route exact path="/signup" component={SignUpPage} />
-          {/* <DocumentTitle title="Cadastro"> */}
         <ProtectedRoute exact path="/cart" component={CartPage} />
-          {/* <DocumentTitle title="Carrinho"> */}
         <ProtectedRoute exact path="/edit-address" component={EditAddressPage} />
-          {/* <DocumentTitle title="Editar endereço"> */}      
         <ProtectedRoute exact path="/edit-profile" component={EditProfilePage} />
-          {/* <DocumentTitle title="Editar perfil"> */}        
-        <ProtectedRoute exact path="/feed" component={FeedPage} />
-          {/* <DocumentTitle title="Home"> */}       
-        <ProtectedRoute exact path="/profile" component={ProfilePage} />
-          {/* <DocumentTitle title="Seu perfil"> */}      
+        <ProtectedRoute exact path="/feed" component={FeedPage} />     
+        <ProtectedRoute exact path="/profile" component={ProfilePage} />      
         <ProtectedRoute exact path="/restaurant" component={RestaurantPage} />
-          {/* <DocumentTitle title="Restaurante"> */}
-        <ProtectedRoute exact path="/search" component={SearchPage} />
-          {/* <DocumentTitle title="Buscar"> */}   
+        <ProtectedRoute exact path="/search" component={SearchPage} /> 
         <ProtectedRoute exact path="/signup-address" component={SignUpAddressPage} />
-          {/* <DocumentTitle title="Cadastrar endereço"> */}
       </Switch>
     </BrowserRouter>
   );

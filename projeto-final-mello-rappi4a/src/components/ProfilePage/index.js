@@ -50,7 +50,6 @@ function ProfilePage() {
         axiosConfig
       );
       setOrderHistory(response.data.orders);
-      console.log(response);
     } catch (error) {
       console.log(error);
     }
