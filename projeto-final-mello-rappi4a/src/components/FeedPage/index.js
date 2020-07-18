@@ -13,16 +13,15 @@ import {
   Filter,
   Label,
   SectionRestaurant,
-  RestaurantContainer,
-  RestaurantCard,
-} from "./styles";
 
-function FeedPage(props) {
+} from "./styles"
+
+function FeedPage() {
   const history = useHistory();
-  const [restaurantList, setRestaurantList] = useState([]);
-  const [selectRestaurant, setSelectRestaurant] = useState([]);
-  const baseUrl =
-    "https://us-central1-missao-newton.cloudfunctions.net/rappi4A/restaurants";
+  const [restaurantList, setRestaurantList] = useState([])
+  const [selectRestaurant, setSelectRestaurant] = useState()
+  const [selectedCategory, setSeletectedCategory] = useState("")
+  const baseUrl = "https://us-central1-missao-newton.cloudfunctions.net/rappi4A/restaurants"
 
   useEffect(() => {
     getRestaurantList();
@@ -46,21 +45,66 @@ function FeedPage(props) {
     }
   };
 
-  const getSelectRestaurant = (category) => {
-    const chosenRestaurant = restaurantList.filter(
-      (item) => item.category === category
-    );
-
-    return setSelectRestaurant(chosenRestaurant);
-  };
-
   const restaurantListFilter = restaurantList.filter((item, index, arr) => {
-    return (
-      arr.map((mapItem) => mapItem["category"]).indexOf(item["category"]) ===
-      index
-    );
-  });
+      
+    return arr.map((mapItem) => mapItem['category']).indexOf(item['category']) === index
+  })
+  
+  const handleCategories = () => {
+    let categories = restaurantListFilter.map(item => {
+      return item.category
+    })
+    return categories
+  }
+   
+  let categoriesList = handleCategories()
+  
+  const handleClickCategory = (category) => {
+    let chosenRestaurant = []
+    
+    restaurantList.forEach(restaurant => {
 
+      if(category === restaurant.category && category !== selectedCategory) {
+        setSeletectedCategory(category)
+        chosenRestaurant.push(restaurant)
+        setSelectRestaurant(chosenRestaurant)
+      } else if(category === selectedCategory){
+        setSeletectedCategory("")
+        setSelectRestaurant(restaurantList)
+      }
+    })
+    return chosenRestaurant  
+  }
+
+  const switchRestaurantsList = (list) => {
+  
+      const renderedList = list.map(restaurant => {
+      return <CardRestaurant 
+        key={restaurant.id}
+        id={restaurant.id}
+        logoUrl={restaurant.logoUrl}
+        name={restaurant.name}
+        deliveryTime={restaurant.deliveryTime}
+        shipping={restaurant.shipping}
+      />  
+    })
+    return renderedList
+  }
+ 
+  const renderRestaurantsList = () => {
+    let jsx
+    switch (Boolean(selectedCategory)) {
+      case false:
+        jsx = switchRestaurantsList(restaurantList)
+        return jsx;  
+      case true :
+        jsx = switchRestaurantsList(selectRestaurant) 
+        return jsx;
+      default:
+        break;
+    }
+  }
+  
   const goToSearchPage = () => {
     history.push("/search");
   };
@@ -81,38 +125,21 @@ function FeedPage(props) {
         <input type="text" placeholder="Restaurante" onClick={goToSearchPage} />
       </Search>
       <Filter>
-        {restaurantListFilter.map((item) => {
+      {categoriesList.map(category => {
           return (
-            <article key={item.id}>
-              <Label onClick={() => getSelectRestaurant(item.category)}>
-                {item.category}
-              </Label>
+            <article key={category}>
+              <Label 
+                onClick={() => handleClickCategory(category)}
+              >
+                {category}
+              </Label> 
             </article>
           );
         })}
       </Filter>
       <SectionRestaurant>
-        {selectRestaurant.length === 0 ? (
-          <CardRestaurant />
-        ) : (
-          selectRestaurant.map((item) => {
-            return (
-              <RestaurantContainer key={item.id} onClick={() => goToRestaurantPage(item.id)}>
-                <RestaurantCard>
-                  <img src={item.logoUrl} alt="Logo do restaurante" />
-                  <p>{item.name}</p>
-                  <article>
-                    <span>
-                      {item.deliveryTime} - {item.deliveryTime + 10} min
-                    </span>
-                    <span>Frete R$6,00</span>
-                  </article>
-                </RestaurantCard>
-              </RestaurantContainer>
-            );
-          })
-        )}
-      </SectionRestaurant>
+      {renderRestaurantsList()}
+      </SectionRestaurant>     
       <Footer />
     </FeedContainer>
   );
