@@ -115,7 +115,7 @@ export const RestaurantCard = styled.div`
     font-size: 16px;
     letter-spacing: -0.39px;
     color: #e86e5a;
-    margin: 0 -90px;
+    margin-left: -90px;
     padding: 8px 0;
   }
 
