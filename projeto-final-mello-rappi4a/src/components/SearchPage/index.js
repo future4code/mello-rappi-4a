@@ -53,8 +53,8 @@ function SearchPage() {
     history.push("/feed");
   };
 
-  const goToRestaurantPage = () => {
-    history.push("/restaurant");
+  const goToRestaurantPage = (restaurantId) => {
+    history.push(`/restaurant/${restaurantId}`);
   };
 
   return (    
@@ -78,7 +78,7 @@ function SearchPage() {
         {searchRestaurant === "" ? <p>Busque por nome de restaurante</p> : <div />}
         {filteredRestaurantList.length !== 0 || searchRestaurant === "" ? filteredRestaurantList.map(item => {
           return (
-            <RestaurantContainer key={item.id}>
+            <RestaurantContainer key={item.id} onClick={() => goToRestaurantPage(item.id)} >
               <RestaurantCard>
                 <img src={item.logoUrl} alt="Logo do restaurante" />
                 <p>{item.name}</p>

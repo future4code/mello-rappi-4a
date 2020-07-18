@@ -4,8 +4,8 @@ import axios from "axios";
 import CardRestaurant from "./CardRestaurant";
 import Footer from "../Footer/index";
 
-import searchIcon from "../../assets/search.svg"
-import { 
+import searchIcon from "../../assets/search.svg";
+import {
   FeedContainer,
   ContainerTitle,
   Title,
@@ -13,9 +13,10 @@ import {
   Filter,
   Label,
   SectionRestaurant,
+
 } from "./styles"
 
-function FeedPage(props) {
+function FeedPage() {
   const history = useHistory();
   const [restaurantList, setRestaurantList] = useState([])
   const [selectRestaurant, setSelectRestaurant] = useState()
@@ -27,24 +28,23 @@ function FeedPage(props) {
   }, []);
 
   const getRestaurantList = async () => {
-    const token = JSON.parse(localStorage.getItem("rappi4")).token
+    const token = JSON.parse(localStorage.getItem("rappi4")).token;
 
     try {
       const axiosConfig = {
         headers: {
-          auth: token
-        } 
-      } 
+          auth: token,
+        },
+      };
 
-      const response = await axios.get(`${baseUrl}`, axiosConfig)
+      const response = await axios.get(`${baseUrl}`, axiosConfig);
 
-      setRestaurantList(response.data.restaurants)
+      setRestaurantList(response.data.restaurants);
     } catch (e) {
-      alert("Lista de restaurantes falhou :(")
+      alert("Lista de restaurantes falhou :(");
     }
-  }
+  };
 
-  
   const restaurantListFilter = restaurantList.filter((item, index, arr) => {
       
     return arr.map((mapItem) => mapItem['category']).indexOf(item['category']) === index
@@ -58,7 +58,6 @@ function FeedPage(props) {
   }
    
   let categoriesList = handleCategories()
-  
   
   const handleClickCategory = (category) => {
     let chosenRestaurant = []
@@ -76,9 +75,6 @@ function FeedPage(props) {
     })
     return chosenRestaurant  
   }
-
-  
-
 
   const switchRestaurantsList = (list) => {
   
@@ -113,20 +109,20 @@ function FeedPage(props) {
     history.push("/search");
   };
 
+  const goToRestaurantPage = (restaurantId) => {
+    history.push(`/restaurant/${restaurantId}`);
+  };
+
   return (
     <FeedContainer>
       <ContainerTitle>
         <Title>
-        <p>Rappi4</p>
+          <p>Rappi4</p>
         </Title>
       </ContainerTitle>
       <Search>
-        <img src={searchIcon} alt="Ícone de busca"/>
-        <input
-          type="text"
-          placeholder="Restaurante"
-          onClick={goToSearchPage}
-        />
+        <img src={searchIcon} alt="Ícone de busca" />
+        <input type="text" placeholder="Restaurante" onClick={goToSearchPage} />
       </Search>
       <Filter>
       {categoriesList.map(category => {
@@ -138,7 +134,7 @@ function FeedPage(props) {
                 {category}
               </Label> 
             </article>
-          )
+          );
         })}
       </Filter>
       <SectionRestaurant>
@@ -150,4 +146,3 @@ function FeedPage(props) {
 }
 
 export default FeedPage;
-

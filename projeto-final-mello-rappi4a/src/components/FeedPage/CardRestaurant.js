@@ -11,7 +11,6 @@ const CardRestaurant = (props) => {
   };
   
   return (
-    
       <RestaurantContainer>
         <RestaurantCard onClick={(() => goToRestaurantPage(props.id))} >
           <img src={props.logoUrl} alt="Logo do restaurante" />
@@ -22,9 +21,7 @@ const CardRestaurant = (props) => {
           </article>
         </RestaurantCard>
       </RestaurantContainer>
-          
-    
-  )
+  )    
 }
 
 export default CardRestaurant;

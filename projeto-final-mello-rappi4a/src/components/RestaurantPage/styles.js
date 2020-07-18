@@ -128,8 +128,8 @@ export const RestaurantLogo = styled.img`
 `;
 
 export const ProductImage = styled.img`
-  width: 97px;
-  height: 110px;
+max-width:35%;
+  max-height: 100%;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   background-color: #d8d8d8;
