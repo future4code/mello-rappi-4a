@@ -55,7 +55,6 @@ function RestaurantPage() {
   const [showModal, setShowModal] = useState(false);
   let [quantity, setQuantity] = useState(0);
 
-  const [token, setToken] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const { cart, dispatch } = useContext(cartContext);
@@ -74,18 +73,20 @@ function RestaurantPage() {
     setQuantity((quantity -= 1));
   };
 
+  const token = JSON.parse(localStorage.getItem("rappi4")).token;
   const [restaurantDetail, setRestaurantDetail] = useState();
 
   useEffect(() => {
-    setToken(localStorage.getItem("token"));
     fetchDetails();
   }, []);
 
-  const axiosConfig =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ing3eDdYcEh3Y0xLR2oxQnpYalVNIiwibmFtZSI6ImxvdXJlbmNvIHBhc3NvcyIsImVtYWlsIjoibHBhc3Nvc0BnbWFpbC5jb20iLCJjcGYiOiIwMzEtOTQ5LTEzMC0yMSIsImhhc0FkZHJlc3MiOnRydWUsImFkZHJlc3MiOiJCYXLDo28gZG8gQW1hem9uYXMsIDU0MiwgMTAzLCAxMDIgLSBCYXLDo28iLCJpYXQiOjE1OTQ2Njk4NDd9.Uo3uW6VOCdLmdbrJx6qNp1WP66juoszFywTXIixaldY";
+  const axiosConfig = token;
 
   const fetchDetails = async () => {
-    const response = await fetchRestaurantDetail(restaurantId.restaurantId, axiosConfig);
+    const response = await fetchRestaurantDetail(
+      restaurantId.restaurantId,
+      axiosConfig
+    );
     setRestaurantDetail(response);
   };
 
