@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
     * {
-    font-family: Roboto-Regular, sans-serif;
+    font-family: "Roboto", sans-serif;
     max-width: 420px;
     margin: 0;
     padding: 0;

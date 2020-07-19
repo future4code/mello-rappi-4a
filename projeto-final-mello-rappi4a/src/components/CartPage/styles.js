@@ -51,10 +51,60 @@ export const AddressInfo = styled(ProfileInfo)`
   margin: 0px;
   padding: 16px;
   background-color: #eeeeee;
+  margin-bottom: 16px;
 
   #addressTitle {
     color: #b8b8b8;
   }
+`;
+
+export const RestaurantContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 0 16px;
+  width: 360px;
+`;
+
+export const RestaurantTitle = styled.p`
+  width: 328px;
+  height: 18px;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.39px;
+  color: #e86e5a;
+  margin: 8px 16px;
+`;
+
+export const RestaurantDeliveryTime = styled.span`
+  width: 104px;
+  height: 18px;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.39px;
+  color: #b8b8b8;
+  margin: 8px 16px;
+`;
+
+export const RestaurantAdress = styled.p`
+  width: 328px;
+  height: 18px;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.39px;
+  color: #b8b8b8;
+  margin: 4px 16px;
 `;
 
 export const LoadingContainer = styled.div`
@@ -105,7 +155,7 @@ export const PaymentMethod = styled.div`
   label {
     width: 296px;
     height: 18px;
-    font-family: Roboto-Regular, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: 16px;
     font-weight: normal;
     font-stretch: normal;
@@ -127,7 +177,7 @@ export const ConfirmButton = styled.div`
     border-radius: 2px;
     background-color: #e86e5a;
     font-size: 16px;
-    font-family: Roboto-Regular, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: normal;
     font-stretch: normal;
     font-style: normal;
@@ -140,7 +190,7 @@ export const ConfirmButton = styled.div`
   }
 `;
 export const ProductCard = styled.div`
-  width: 328px;
+  width: 100vw;
   height: 112px;
   border-radius: 8px;
   border: solid 1px #b8b8b8;
@@ -175,7 +225,7 @@ export const ProductImage = styled.img`
 export const ProductTitle = styled.p`
   width: 166px;
   height: 18px;
-  font-family: Roboto-Regular, sans-serif;
+  font-family: "Roboto", sans-serif;
   margin: 0 0 10px 0;
   font-size: 16px;
   font-weight: normal;
@@ -193,7 +243,7 @@ export const ProductDescriptionContainer = styled.div`
 export const ProductDescription = styled.p`
   width: 198px;
   height: 30px;
-  font-family: Roboto-Regular, sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 14px;
   font-weight: normal;
   font-stretch: normal;
@@ -206,7 +256,7 @@ export const ProductDescription = styled.p`
 export const ProductPrice = styled.p`
   width: 108px;
   height: 19px;
-  font-family: Roboto-Regular, sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 16px;
   font-weight: normal;
   font-stretch: normal;
@@ -215,4 +265,124 @@ export const ProductPrice = styled.p`
   letter-spacing: -0.39px;
   color: black;
   padding: 10px 0 0 0;
+`;
+
+export const EmptyCartContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+`;
+
+export const ProductQuantityContainerAdded = styled.div`
+  width: 33px;
+  height: 33px;
+  border-radius: 0px 8px 0px 8px;
+  border: solid 1px #e02020;
+  position: absolute;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const ProductQuantityAdded = styled.p`
+  width: 9px;
+  height: 19px;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.39px;
+  text-align: center;
+  color: #e02020;
+`;
+
+export const RemoveFromCart = styled.p`
+  width: 48px;
+  height: 14px;
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.29px;
+  text-align: center;
+  color: #e02020;
+  cursor: pointer;
+`;
+
+export const RemoveFromCartContainer = styled.div`
+  width: 90px;
+  height: 31px;
+  border-radius: 8px 0px 8px 0;
+  border: solid 1px #e02020;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: flex-end;
+`;
+
+export const ShippingFeeContainer = styled.div`
+  width: 100vw;
+  display: flex;
+  justify-content: flex-end;
+  margin: 16px;
+
+  p {
+    width: 104px;
+    height: 18px;
+    font-family: "Roboto";
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: -0.39px;
+    text-align: right;
+    color: black;
+  }
+`;
+
+export const SubtotalContainer = styled.div`
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  margin: 16px;
+  position: absolute;
+  bottom: 250px;
+  width: 100vw;
+
+  p {
+    width: 164px;
+    height: 18px;
+    font-family: "Roboto";
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: -0.39px;
+    color: black;
+  }
+
+  span {
+    width: 164px;
+    height: 21px;
+    font-family: "Roboto";
+    font-size: 18px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: -0.43px;
+    text-align: right;
+    color: #e86e5a;
+  }
 `;

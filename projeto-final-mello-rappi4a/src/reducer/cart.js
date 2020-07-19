@@ -1,5 +1,6 @@
 export const initialState = {
   cart: [],
+  restaurantIdentification: "",
 };
 
 const cart = (state, action) => {
@@ -24,7 +25,11 @@ const cart = (state, action) => {
           return product;
         });
       }
-      return { ...state, cart: newCart };
+      return {
+        ...state,
+        cart: newCart,
+        restaurantIdentification: action.restaurantId,
+      };
     case "REMOVE_FROM_CART": {
       const newCart = state.cart.filter((product) => {
         return product.id !== action.productId;

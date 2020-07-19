@@ -12,6 +12,19 @@ import {
   ProductCard,
   ProductContainer,
   ProductImage,
+  ProductTitle,
+  ProductPrice,
+  EmptyCartContainer,
+  ProductQuantityContainerAdded,
+  ProductQuantityAdded,
+  RemoveFromCartContainer,
+  RemoveFromCart,
+  ShippingFeeContainer,
+  SubtotalContainer,
+  RestaurantContainer,
+  RestaurantTitle,
+  RestaurantAdress,
+  RestaurantDeliveryTime,
 } from "./styles";
 
 import Footer from "../Footer/index";
@@ -19,17 +32,22 @@ import Footer from "../Footer/index";
 import axios from "axios";
 import ReactLoading from "react-loading";
 
+import { fetchRestaurantDetail } from "../../functions/axios";
 import CartContext from "../../context/CartContext";
 
 function CartPage() {
   const cartContext = useContext(CartContext);
+
+  const removeProductFromCart = (productId) => {
+    cartContext.dispatch({ type: "REMOVE_FROM_CART", productId });
+  };
 
   let totalValue = 0;
 
   cartContext.cart.forEach((product) => {
     totalValue = totalValue + product.price * product.quantity;
   });
-
+  const [restaurantDetail, setRestaurantDetail] = useState();
   const [user, setUser] = useState([]);
   const [loading, setLoading] = useState(true);
   const baseUrl =
@@ -41,6 +59,19 @@ function CartPage() {
     headers: {
       auth: token,
     },
+  };
+  const axiosToken = token;
+
+  useEffect(() => {
+    fetchDetails();
+  }, [restaurantDetail]);
+
+  const fetchDetails = async () => {
+    const response = await fetchRestaurantDetail(
+      cartContext.restaurantIdentification,
+      axiosToken
+    );
+    setRestaurantDetail(response);
   };
 
   const getProfile = async () => {
@@ -57,26 +88,71 @@ function CartPage() {
       <div>
         {cartContext.cart.map((product) => {
           return (
-            <ProductContainer>
-              <ProductCard>
-                <ProductImage src={product.photoUrl} />
-              </ProductCard>
-            </ProductContainer>
+            <div>
+              <div>
+                <RestaurantContainer>
+                  <RestaurantTitle>
+                    {restaurantDetail && restaurantDetail.restaurant.name}
+                  </RestaurantTitle>
+                  <RestaurantAdress>
+                    {restaurantDetail && restaurantDetail.restaurant.address}
+                  </RestaurantAdress>
+                  <RestaurantDeliveryTime>
+                    {restaurantDetail &&
+                      restaurantDetail.restaurant.deliveryTime}{" "}
+                    min
+                  </RestaurantDeliveryTime>
+                </RestaurantContainer>
+              </div>
+              <ProductContainer>
+                <ProductCard>
+                  <ProductImage src={product.photoUrl} />
+                  <ProductDescription>
+                    <ProductTitle>{product.name}</ProductTitle>
+                    {product.description}
+                    <ProductPrice>R$ {product.price.toFixed(2)}</ProductPrice>
+                  </ProductDescription>
+                  <RemoveFromCartContainer>
+                    <RemoveFromCart
+                      onClick={() => removeProductFromCart(product.id)}
+                    >
+                      Remover
+                    </RemoveFromCart>
+                  </RemoveFromCartContainer>
+                  <ProductQuantityContainerAdded>
+                    <ProductQuantityAdded>
+                      {product.quantity}
+                    </ProductQuantityAdded>
+                  </ProductQuantityContainerAdded>
+                </ProductCard>
+              </ProductContainer>
+            </div>
           );
         })}
+        <ShippingFeeContainer>
+          <p>
+            Frete R$
+            {restaurantDetail &&
+              restaurantDetail.restaurant.shipping.toFixed(2)}
+          </p>
+        </ShippingFeeContainer>
+        <SubtotalContainer>
+          <p>SUBTOTAL</p>
+          <span>R$ {totalValue.toFixed(2)}</span>
+        </SubtotalContainer>
       </div>
     ) : (
-      <div>
+      <EmptyCartContainer>
         <p>Seu carrinho está vazio! </p>
-      </div>
+      </EmptyCartContainer>
     );
   useEffect(() => {
     getProfile();
   }, []);
-  console.log(cartContext.cart);
+
   const render = loading ? (
     <LoadingContainer>
-      <ReactLoading type="spin" color="#ff3b30" />{" "}
+      <ReactLoading type="spin" color="#ff3b30" />
     </LoadingContainer>
   ) : (
     <CartPageContainer>
