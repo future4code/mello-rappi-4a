@@ -2,17 +2,14 @@ import React, { useReducer, useContext } from "react";
 
 import Router from "./components/Router";
 import GlobalStyle from "./styles/globals";
- 
+
 import cart, { initialState } from "./reducer/cart";
-import CartContext from "./context/cart";
+import CartContext from "./context/CartContext";
 
 function App() {
-  const [cartState, cartDispatch] = useReducer(cart, initialState);
-
+  const [state, dispatch] = useReducer(cart, initialState);
   return (
-    <CartContext.Provider
-      value={{ products: cartState, dispatch: cartDispatch }}
-    >
+    <CartContext.Provider value={{ cart: state.cart, dispatch: dispatch }}>
       <div>
         <GlobalStyle />
         <Router />
