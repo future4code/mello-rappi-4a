@@ -43,7 +43,7 @@ import ReactLoading from "react-loading";
 
 import { useParams } from "react-router-dom";
 
-import cartContext from "../../context/cart";
+import CartContext from "../../context/CartContext";
 
 function RestaurantPage() {
   const restaurantId = useParams();
@@ -57,7 +57,7 @@ function RestaurantPage() {
 
   const [loading, setLoading] = useState(true);
 
-  const { cart, dispatch } = useContext(cartContext);
+  const cartContext = useContext(CartContext);
 
   const handleShowModal = () => {
     setShowModal(true);
@@ -71,6 +71,11 @@ function RestaurantPage() {
 
   const removeFromCart = () => {
     setQuantity((quantity -= 1));
+  };
+
+  const addProductToCart = (product) => {
+    cartContext.dispatch({ type: "ADD_TO_CART", product: product });
+    console.log(cartContext.cart);
   };
 
   const token = JSON.parse(localStorage.getItem("rappi4")).token;
@@ -192,8 +197,11 @@ function RestaurantPage() {
                             </ProductPrice>
                           </ProductDescription>
                         </ProductDescriptionContainer>
-                        <div>{addRemoveProducts}</div>
-                        <div>{productQuantity}</div>
+                        <button onClick={() => addProductToCart(product)}>
+                          Adicionar ao carrinho
+                        </button>
+                        {/* <div>{addRemoveProducts}</div>
+                        <div>{productQuantity}</div> */}
                       </ProductCard>
                     </ProductContainer>
                   );

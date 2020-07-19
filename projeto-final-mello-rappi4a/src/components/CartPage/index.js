@@ -8,6 +8,10 @@ import {
   CartPageContainer,
   PaymentMethodContainer,
   ConfirmButton,
+  ProductDescription,
+  ProductCard,
+  ProductContainer,
+  ProductImage,
 } from "./styles";
 
 import Footer from "../Footer/index";
@@ -15,12 +19,16 @@ import Footer from "../Footer/index";
 import axios from "axios";
 import ReactLoading from "react-loading";
 
-import cartContext from "../../context/cart";
+import CartContext from "../../context/CartContext";
 
 function CartPage() {
-  const { cart, dispatch } = useContext(cartContext);
-  const [cartProducts, setCartProducts] = useState([cart.products]);
-  const [cartSubtotal, setCartSubtotal] = useState([cart.subtotal]);
+  const cartContext = useContext(CartContext);
+
+  let totalValue = 0;
+
+  cartContext.cart.forEach((product) => {
+    totalValue = totalValue + product.price * product.quantity;
+  });
 
   const [user, setUser] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -44,11 +52,28 @@ function CartPage() {
       console.log(error);
     }
   };
-
+  const cartRender =
+    cartContext.cart.length >= 1 ? (
+      <div>
+        {cartContext.cart.map((product) => {
+          return (
+            <ProductContainer>
+              <ProductCard>
+                <ProductImage src={product.photoUrl} />
+              </ProductCard>
+            </ProductContainer>
+          );
+        })}
+      </div>
+    ) : (
+      <div>
+        <p>Seu carrinho está vazio! </p>
+      </div>
+    );
   useEffect(() => {
     getProfile();
   }, []);
-
+  console.log(cartContext.cart);
   const render = loading ? (
     <LoadingContainer>
       <ReactLoading type="spin" color="#ff3b30" />{" "}
@@ -68,6 +93,7 @@ function CartPage() {
           )}
         </div>
       </AddressInfo>
+      {cartRender}
       <PaymentMethodContainer>
         <PaymentMethodTitle>
           <p>Forma de Pagamento</p>

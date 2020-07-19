@@ -139,3 +139,80 @@ export const ConfirmButton = styled.div`
     cursor: pointer;
   }
 `;
+export const ProductCard = styled.div`
+  width: 328px;
+  height: 112px;
+  border-radius: 8px;
+  border: solid 1px #b8b8b8;
+  margin: 0 16px;
+  display: flex;
+  position: relative;
+`;
+
+export const RestaurantLogo = styled.img`
+  width: 328px;
+  height: 120px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  margin: 0 16px;
+`;
+
+export const ProductContainer = styled.div`
+  width: 360px;
+  height: 120px;
+`;
+
+export const ProductImage = styled.img`
+  max-width: 35%;
+  max-height: 100%;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  background-color: #d8d8d8;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+`;
+
+export const ProductTitle = styled.p`
+  width: 166px;
+  height: 18px;
+  font-family: Roboto-Regular, sans-serif;
+  margin: 0 0 10px 0;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.39px;
+  color: #e86e5a;
+`;
+
+export const ProductDescriptionContainer = styled.div`
+  padding: 15px;
+`;
+
+export const ProductDescription = styled.p`
+  width: 198px;
+  height: 30px;
+  font-family: Roboto-Regular, sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.34px;
+  color: #b8b8b8;
+`;
+
+export const ProductPrice = styled.p`
+  width: 108px;
+  height: 19px;
+  font-family: Roboto-Regular, sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.39px;
+  color: black;
+  padding: 10px 0 0 0;
+`;
