@@ -73,9 +73,13 @@ function RestaurantPage() {
     setQuantity((quantity -= 1));
   };
 
-  const addProductToCart = (product) => {
-    cartContext.dispatch({ type: "ADD_TO_CART", product: product });
-    console.log(cartContext.cart);
+  const addProductToCart = (product, restaurantId) => {
+    cartContext.dispatch({
+      type: "ADD_TO_CART",
+      product: product,
+      restaurantId: restaurantId.restaurantId,
+    });
+    alert("Produto adicionado ao carrinho!");
   };
 
   const token = JSON.parse(localStorage.getItem("rappi4")).token;
@@ -94,6 +98,7 @@ function RestaurantPage() {
     );
     setRestaurantDetail(response);
   };
+
 
   // Lógica para mostrar os produtos conforme suas categorias
 
@@ -197,11 +202,18 @@ function RestaurantPage() {
                             </ProductPrice>
                           </ProductDescription>
                         </ProductDescriptionContainer>
-                        <button onClick={() => addProductToCart(product)}>
-                          Adicionar ao carrinho
-                        </button>
-                        {/* <div>{addRemoveProducts}</div>
-                        <div>{productQuantity}</div> */}
+                        <div>
+                          <AddToCartContainer>
+                            <AddToCart
+                              onClick={() =>
+                                addProductToCart(product, restaurantId)
+                              }
+                            >
+                              Adicionar
+                            </AddToCart>
+                          </AddToCartContainer>
+                        </div>
+                        <div>{productQuantity}</div>
                       </ProductCard>
                     </ProductContainer>
                   );

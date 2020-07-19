@@ -30,7 +30,7 @@ export const RestaurantContainer = styled.div`
 export const RestaurantTitle = styled.p`
   width: 328px;
   height: 18px;
-  font-family: Roboto-Regular, sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 16px;
   font-weight: normal;
   font-stretch: normal;
@@ -44,7 +44,7 @@ export const RestaurantTitle = styled.p`
 export const RestaurantDeliveryTime = styled.span`
   width: 104px;
   height: 18px;
-  font-family: Roboto-Regular, sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 16px;
   font-weight: normal;
   font-stretch: normal;
@@ -58,7 +58,7 @@ export const RestaurantDeliveryTime = styled.span`
 export const RestaurantDeliveryPrice = styled.span`
   width: 104px;
   height: 18px;
-  font-family: Roboto-Regular, sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 16px;
   font-weight: normal;
   font-stretch: normal;
@@ -72,7 +72,7 @@ export const RestaurantDeliveryPrice = styled.span`
 export const RestaurantAdress = styled.p`
   width: 328px;
   height: 18px;
-  font-family: Roboto-Regular, sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 16px;
   font-weight: normal;
   font-stretch: normal;
@@ -86,7 +86,7 @@ export const RestaurantAdress = styled.p`
 export const RestaurantCategory = styled.div`
   width: 104px;
   height: 18px;
-  font-family: Roboto-Regular, sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 16px;
   margin: 4px 16px;
   font-weight: normal;
@@ -128,7 +128,7 @@ export const RestaurantLogo = styled.img`
 `;
 
 export const ProductImage = styled.img`
-max-width:35%;
+  max-width: 35%;
   max-height: 100%;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
@@ -140,7 +140,7 @@ max-width:35%;
 export const ProductTitle = styled.p`
   width: 166px;
   height: 18px;
-  font-family: Roboto-Regular, sans-serif;
+  font-family: "Roboto", sans-serif;
   margin: 0 0 10px 0;
   font-size: 16px;
   font-weight: normal;
@@ -158,7 +158,7 @@ export const ProductDescriptionContainer = styled.div`
 export const ProductDescription = styled.p`
   width: 198px;
   height: 30px;
-  font-family: Roboto-Regular, sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 14px;
   font-weight: normal;
   font-stretch: normal;
@@ -171,7 +171,7 @@ export const ProductDescription = styled.p`
 export const ProductPrice = styled.p`
   width: 108px;
   height: 19px;
-  font-family: Roboto-Regular, sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 16px;
   font-weight: normal;
   font-stretch: normal;
@@ -201,7 +201,7 @@ export const LoadingContainer = styled.div`
 export const AddToCart = styled.p`
   width: 48px;
   height: 14px;
-  font-family: Roboto-Regular, sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 12px;
   font-weight: normal;
   font-stretch: normal;
@@ -230,7 +230,7 @@ export const AddToCartContainer = styled.div`
 export const ProductCategory = styled.p`
   width: 328px;
   height: 18px;
-  font-family: Roboto-Regular, sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 16px;
   font-weight: normal;
   font-stretch: normal;
@@ -274,7 +274,7 @@ export const ProductQuantity = styled.p`
 export const RemoveFromCart = styled.p`
   width: 48px;
   height: 14px;
-  font-family: Roboto-Regular, sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 12px;
   font-weight: normal;
   font-stretch: normal;

@@ -5,7 +5,7 @@ import cartContext from "../../context/CartContext";
 const AddToCart = styled.p`
   width: 48px;
   height: 14px;
-  font-family: Roboto-Regular, sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 12px;
   font-weight: normal;
   font-stretch: normal;
@@ -34,7 +34,7 @@ const AddToCartContainer = styled.div`
 const RemoveFromCart = styled.p`
   width: 48px;
   height: 14px;
-  font-family: Roboto-Regular, sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 12px;
   font-weight: normal;
   font-stretch: normal;
